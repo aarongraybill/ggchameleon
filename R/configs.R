@@ -67,5 +67,22 @@ edit_the_accent_palette <-
       paste0("accent_", 1:length(the$accent_palette))
   }
 refresh_theming()
+  }
+
+edit_the_fonts <- function(...) {
+  args <- list(...)
+  found = intersect(names(args), names(the$fonts))
+  missing = setdiff(names(args), names(the$fonts))
+  if (length(missing) > 0) {
+    message(paste0(
+      "Arguments: (",
+      paste0(missing, collapse = ", "),
+      ") are not in the fonts and will be ignored."
+    ))
+  }
+  for (found_name in found) {
+    the$fonts[[found_name]] <- args[[found_name]]
+  }
+  refresh_theming()
 }
 
