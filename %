@@ -1,8 +1,0 @@
-R/auto_color_orders.R:    return(rep_len(palette %>% unlist() %>%  as.vector(), n))
-R/auto_color_orders.R:    ls <-  colorspace::hex2RGB(palette) %>%
-R/auto_color_orders.R:    return(palette[colors] %>% unlist() %>% unname())
-R/auto_color_orders.R:    ls <-  colorspace::hex2RGB(inputs) %>%
-R/check_custom_configs.R:#   while (!response%in%c("Y","N")){
-R/font_check.R:    if (!all(c(the$fonts)%in%sysfonts::font_families())){
-R/install_custom_fonts.R:      link <- gsub(' ', '%20', link)
-R/show_colors.R:      text(col(colours) - 0.5, -row(colours) + 0.5, labels=matrix(color_names,nrow=nrow) %>% t(),
