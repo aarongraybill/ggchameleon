@@ -7,21 +7,6 @@
 #' install_philly_fonts()
 #'
 
-install_fonts <-
-  function(fonts = the$fonts) {
-    p_path <- system.file("extdata/fonts", package = "gigiThemeR")
-
-    for (font in fonts) {
-      unlink(paste0(p_path, "/", font), recursive = T)
-      link <-
-        paste0('https://fonts.google.com/download?family=', font)
-      link <- gsub(' ', '%20', link)
-      utils::download.file(link, paste0(p_path, "/", font, ".zip"), mode = "wb")
-      utils::unzip(paste0(p_path, "/", font, ".zip"), exdir = paste0(p_path, "/", font))
-    }
-
-  }
-
 load_fonts <- function() {
 
   for (font in the$fonts) {
