@@ -9,7 +9,7 @@
 
 install_fonts <-
   function(fonts = the$fonts) {
-    p_path <- system.file("extdata/fonts", package = "PhillyRTheme")
+    p_path <- system.file("extdata/fonts", package = "gigiThemeR")
 
     for (font in fonts) {
       unlink(paste0(p_path, "/", font), recursive = T)
