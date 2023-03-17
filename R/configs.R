@@ -31,3 +31,20 @@ the$fonts <- # Must be spelled exactly as appears in google fonts
        display = "Public Sans"
   )
 
+edit_the_main_palette <- function(...) {
+  args <- list(...)
+  found = intersect(names(args), names(the$main_palette))
+  missing = setdiff(names(args), names(the$main_palette))
+  if (length(missing) > 0) {
+    message(paste0(
+      "Arguments: (",
+      paste0(missing, collapse = ", "),
+      ") are not in the main palette and will be ignored."
+    ))
+  }
+  for (found_name in found) {
+    the$main_palette[[found_name]] <- args[[found_name]]
+  }
+  refresh_theming()
+}
+
