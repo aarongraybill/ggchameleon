@@ -2,6 +2,8 @@
 #'
 the <- new.env(parent = emptyenv())
 
+the$theme <- theme_custom()
+
 the$main_palette <-
   list(
     "main" = "#22311d", # A main distinctive color for your brand
