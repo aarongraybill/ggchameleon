@@ -10,6 +10,7 @@ parse_configs <- function(config = "default",file="gigiConfig.yml") {
     rlang::exec("edit_the_main_palette",!!!configs$main_palette)
     rlang::exec("edit_the_accent_palette",!!!configs$accent_palette)
     rlang::exec("edit_the_fonts",!!!configs$fonts)
+    rlang::exec("edit_the_theme",!!!configs$theme)
   } else if (file!="gigiConfig.yml"){
     message(paste0("File \"",file,"\" not found. Resorting to existing. configs."))
   } else{
