@@ -7,6 +7,13 @@
 #'
 #' @examples
 save_current_theme <- function(file="gigiConfig.yml"){
+  if (!requireNamespace("config", quietly = TRUE)) {
+    stop(
+      "Package \"config\" must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+
   while (file.exists(file)){
     new_file <- tempfile("gigiConfig_",tmpdir = "",fileext = ".yml")
     new_file <- substr(new_file,2,nchar(new_file))
