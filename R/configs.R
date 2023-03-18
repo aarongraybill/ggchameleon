@@ -93,9 +93,13 @@ edit_the_fonts <- function(...) {
 }
 
 edit_the_theme <- function(...){
+  args <- list(...)
+  bundled_args <- lapply(args,rebundle_element)
+
   the$theme <-
     the$theme +
-    ggplot2::theme(...)
+    rlang::exec(ggplot2::theme,!!!bundled_args)
+
   refresh_theming()
 }
 
