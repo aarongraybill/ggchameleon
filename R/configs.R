@@ -31,6 +31,8 @@ the$fonts <- # Must be spelled exactly as appears in google fonts
        display = "Public Sans"
   )
 
+the$theme <- ggplot2::theme()
+
 edit_the_main_palette <- function(...) {
   args <- list(...)
   found = intersect(names(args), names(the$main_palette))

@@ -50,5 +50,3 @@ theme_custom <-
     return(t)
   }
 
-the$theme <- theme_custom()
-
