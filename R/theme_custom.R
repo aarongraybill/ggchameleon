@@ -15,7 +15,6 @@ theme_custom <-
             base_line_size = base_size / 22,
             base_rect_size = base_size / 22) {
     library(ggplot2)
-    showtext::showtext_auto()
     t <-
       theme_bw(base_size, base_family, base_line_size, base_rect_size) +
       theme(
