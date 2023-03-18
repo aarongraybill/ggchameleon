@@ -52,15 +52,25 @@ edit_the_accent_palette <-
   function(..., mode = c("overwrite", "append")) {
     mode <- match.arg(mode)
     args <- list(...)
-    if (!is.null(names(args)))
+    if (length(args)==0&&mode=="overwrite"){
+      # Missing overwrite values, probably accent_palette
+      # not present in config, just get out of the function and don't do
+      # anything
+      invisible(NULL)
+    }
+    if (!is.null(names(args))){
       message("Names in the accent palette are deliberately ignored")
-    if (length(args) < 4 &&
-        mode == "overwrite")
+      }
+    if (length(args) < 4 && mode == "overwrite" && length(args)>0){
       warning("Fewer than four accent colors while overwriting is not recommended! Proceeding.")
+      }
     if (mode == "overwrite") {
-      the$accent_palette <- args
-      names(the$accent_palette) <-
-        paste0("accent_", 1:length(the$accent_palette))
+      if (length(args)==0){
+        # Do nothing, no args supplied
+      } else{
+        the$accent_palette <- args
+        names(the$accent_palette) <- paste0("accent_", 1:length(the$accent_palette))
+      }
     } else if (mode == "append") {
     the$accent_palette <- c(the$accent_palette, args)
     names(the$accent_palette) <-
