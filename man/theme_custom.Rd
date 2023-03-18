@@ -27,5 +27,5 @@ A ggplot2 theme object used to update a ggplot2 plot.
 This function is used exactly like a regular ggplot2 theme object. It can be added to a ggplot to change the stylistic elements of a plot
 }
 \details{
-You cannot directly edit any other theme elements. This function returns a complete theme, and if you wish to further modify you should use the ggplot2::theme() command
+You cannot directly edit any other theme elements. This function returns a complete theme, and if you wish to further modify you should use the \code{\link[ggplot2:theme]{ggplot2::theme()}} command
 }

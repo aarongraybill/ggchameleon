@@ -6,7 +6,7 @@
 #' @param base_line_size bae size for line elements
 #' @param base_rect_size base size for rect elements
 #' @return A ggplot2 theme object used to update a ggplot2 plot.
-#' @details You cannot directly edit any other theme elements. This function returns a complete theme, and if you wish to further modify you should use the ggplot2::theme() command
+#' @details You cannot directly edit any other theme elements. This function returns a complete theme, and if you wish to further modify you should use the [ggplot2::theme()] command
 #' @export
 #'
 theme_custom <-

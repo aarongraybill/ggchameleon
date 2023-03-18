@@ -2,8 +2,6 @@
 #'
 the <- new.env(parent = emptyenv())
 
-the$theme <- theme_custom()
-
 the$main_palette <-
   list(
     "main" = "#22311d", # A main distinctive color for your brand
@@ -90,5 +88,13 @@ edit_the_fonts <- function(...) {
     the$fonts[[found_name]] <- args[[found_name]]
   }
   refresh_theming()
+}
+
+edit_the_theme <- function(...){
+  arg <- list(...)
+  the$theme <-
+    the$theme +
+    rlang::exec("ggplot2::theme",!!!args)
+
 }
 
