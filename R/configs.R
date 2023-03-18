@@ -91,10 +91,9 @@ edit_the_fonts <- function(...) {
 }
 
 edit_the_theme <- function(...){
-  arg <- list(...)
   the$theme <-
     the$theme +
-    rlang::exec("ggplot2::theme",!!!args)
-
+    ggplot2::theme(...)
+  refresh_theming()
 }
 
