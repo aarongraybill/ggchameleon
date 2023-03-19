@@ -16,12 +16,11 @@ gen_palette <- function(n) {
     return(the$main_palette$main)
   }
   else{
-    ls <-  colorspace::hex2RGB(palette) |>
-      as("LUV")
-    ls <-  ls@coords
+    ls <-  farver::decode_colour(palette)
+    ls <-  farver::convert_colour(ls, 'rgb', 'lab')
     diffs = matrix(nrow = length(palette), ncol = length(palette))
     for (i in 1:nrow(ls)) {
-      diffs[i, ] = spacesXYZ::DeltaE(ls[i, ], ls)
+      diffs[i, ] = spacesXYZ::DeltaE(ls[i, ], ls,metric = "2000")
     }
     colnames(diffs) <- names(palette)
     rownames(diffs) <- names(palette)
@@ -43,9 +42,8 @@ custom_viridis_palette <-
     inputs <-  c(the$main_palette$main,
                  the$main_palette$intermediate,
                  the$main_palette$contrast)
-    ls <-  colorspace::hex2RGB(inputs) |>
-      as("LUV")
-    ls <-  ls@coords[,1]
+    ls <-  farver::decode_colour(inputs)
+    ls <-  farver::convert_colour(ls, 'rgb', 'lab')[,1]
     inputs <-  inputs[order(ls)]
     ls <-  ls[order(ls)]
     min_l <- min(ls)
