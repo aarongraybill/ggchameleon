@@ -35,10 +35,11 @@ theme_custom <-
         panel.grid.minor.x = element_blank(),
         strip.background = element_rect(fill=the$main_palette$off_white),
         # Begin dealing with text ----
-        text = element_text(family=the$fonts$sans),
-        plot.title = element_text(color=the$main_palette$main,face="bold",hjust=0),
-        plot.subtitle = element_text(hjust=0,family=the$fonts$display,face="bold.italic"),
+        text = element_text(family=the$fonts$sans,colour = the$main_palette$black),
+        plot.title = element_text(color=the$main_palette$main,face="bold",hjust=0,family=the$fonts$display),
+        plot.subtitle = element_text(hjust=0,face="bold.italic"),
         plot.caption = element_text(family=the$fonts$sans,face="italic",hjust=0,color=the$main_palette$black),
+        axis.text = element_text(colour = the$main_palette$black),
         # Legend Positioning: ----
         legend.position = c(0,1),
         legend.justification = c(0,1),
