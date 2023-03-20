@@ -20,7 +20,7 @@ huemint_randomize <- function(){
       mode = "transformer",
       num_colors = 7,
       temperature = "1.5",
-      num_results = 1,
+      num_results = 10,
       adjacency = custom_specs |> as.character(), #the$main_palette |> create_diff_matrix() |> round() |> as.character(),
       palette = c("-","-","#FFFFFF","-","-","-","-")
     )
@@ -42,7 +42,10 @@ huemint_randomize <- function(){
                  add_headers(.headers = c("Content-Type"="application/json")),
                  encode = "json")
   out <- content(result)
-  main_palette_edits <- out$results[[1]]$palette
+  custom_specs[custom_specs==0] <- NA
+  scores <- lapply(out$results,function(x){mean((create_diff_matrix(x$palette)-custom_specs)^2,na.rm=T)})
+
+  main_palette_edits <- out$results[[which.min(scores)]]$palette
   names(main_palette_edits) <- c("main","secondary","white","off_white","black","contrast","intermediate")
   rlang::exec(edit_the_main_palette,!!!main_palette_edits)
 
