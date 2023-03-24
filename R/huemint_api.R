@@ -1,12 +1,14 @@
-huemint_randomize <- function(){
+huemint_randomize <- function(verbose=TRUE){
 
   custom_specs <-
     matrix(data = 0,nrow = 7,ncol=7)
   custom_specs[1,2] <- 50 # Main and secondary should be diffable
   custom_specs[1,3] <- 80 # Main should not be white
+  custom_specs[1,5] <- 50 # Main should not be black
   custom_specs[1,6] <- 75 # Main should be quite different from contrast
   custom_specs[1,7] <- 50 # Main should be somewhat close to intermediate
   custom_specs[2,3] <- 80 # Secondary should not be white
+  custom_specs[2,5] <- 50 # Secondary should not be black
   custom_specs[3,4] <- 5  # Off white should be near white
   custom_specs[3,5] <- 95 # White should not be black
   custom_specs[3,6] <- 20 # White should be close but not too close to contrast
@@ -57,5 +59,5 @@ huemint_randomize <- function(){
   new_accents <- out$results[[1]]$palette[-c(1:2)]
   rlang::exec(edit_the_accent_palette,!!!new_accents)
 
-  show_colors(c(the$main_palette,the$accent_palette))
+  if (verbose) show_colors(c(the$main_palette,the$accent_palette))
 }

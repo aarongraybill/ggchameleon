@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-save_current_theme <- function(file="gigiConfig.yml"){
+save_current_theme <- function(file="chameleon.yml"){
   if (!requireNamespace("config", quietly = TRUE)) {
     stop(
       "Package \"config\" must be installed to use this function.",
@@ -15,7 +15,7 @@ save_current_theme <- function(file="gigiConfig.yml"){
   }
 
   while (file.exists(file)){
-    new_file <- tempfile("gigiConfig_",tmpdir = "",fileext = ".yml")
+    new_file <- tempfile("chameleon_",tmpdir = "",fileext = ".yml")
     new_file <- substr(new_file,2,nchar(new_file))
     message(paste0("\"",file,"\" exists, saving as: \"", new_file,
                    "\"\nConsider Renaming the File to Something More Relevant"))
