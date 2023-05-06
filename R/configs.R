@@ -54,9 +54,6 @@ edit_the_accent_palette <-
   function(..., mode = c("overwrite", "append")) {
     mode <- match.arg(mode)
     args <- list(...)
-    if (!is.null(names(args))){
-      message("Names in the accent palette are deliberately ignored")
-      }
     if (length(args) < 4 && mode == "overwrite" && length(args)>0){
       warning("Fewer than four accent colors while overwriting is not recommended! Proceeding.")
       }
