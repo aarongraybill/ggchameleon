@@ -56,3 +56,7 @@ custom_viridis_palette <-
     )
     )
   }
+
+custom_discrete_viridis_palette <- function(n){
+  custom_viridis_palette()(1:n/n)
+}

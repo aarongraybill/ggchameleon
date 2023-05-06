@@ -1,4 +1,4 @@
-# Discrete ----
+# Discrete Unordered----
 scale_color_custom_d <-
   function (..., alpha = 1, begin = 0, end = 1, direction = 1,
             option = "D", aesthetics = "colour"){
@@ -9,6 +9,19 @@ scale_fill_custom_d <-
   function (..., alpha = 1, begin = 0, end = 1, direction = 1,
             option = "D", aesthetics = "fill"){
     discrete_scale(aesthetics, "custom_d", gen_palette, ...)
+  }
+
+# Discrete Ordered ----
+scale_color_custom_o <-
+  function (..., alpha = 1, begin = 0, end = 1, direction = 1,
+            option = "D", aesthetics = "colour"){
+    discrete_scale(aesthetics="colour", "custom_o", custom_discrete_viridis_palette, ...)
+  }
+
+scale_fill_custom_o <-
+  function (..., alpha = 1, begin = 0, end = 1, direction = 1,
+            option = "D", aesthetics = "fill"){
+    discrete_scale(aesthetics, "custom_o", custom_discrete_viridis_palette, ...)
   }
 
 # Continuous ----
@@ -101,4 +114,6 @@ scale_fill_custom_b <-
       ...
     )
   }
+
+
 

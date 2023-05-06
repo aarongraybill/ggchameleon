@@ -22,12 +22,14 @@ custom_geom_update <- function(){
 
 
 custom_scale_update <- function(){
-  # 3 scale options: continuous, binned, discrete * 2 aes: fill &  colour. 6 alterations
+  # 4 scale options: continuous, binned, discrete, binned * 2 aes: fill &  colour. 8 alterations
  options("ggplot2.discrete.colour"=scale_color_custom_d)
   options("ggplot2.continuous.colour"=scale_color_custom_c)
   options("ggplot2.binned.colour"=scale_color_custom_b)
   options("ggplot2.discrete.fill"=scale_fill_custom_d)
   options("ggplot2.continuous.fill"=scale_fill_custom_c)
   options("ggplot2.binned.fill"=scale_fill_custom_b)
+  options("ggplot2.ordinal.colour"=scale_color_custom_o)
+  options("ggplot2.ordinal.fill"=scale_fill_custom_o)
 
 }
