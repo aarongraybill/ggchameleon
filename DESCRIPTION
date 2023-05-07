@@ -15,4 +15,5 @@ Imports:
     sysfonts (>= 0.8.8),
     showtext,
     config
-
+Depends: 
+    R (>= 2.10)
