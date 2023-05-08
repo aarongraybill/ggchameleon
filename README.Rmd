@@ -1,0 +1,85 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ggchameleon <img src="man/figures/logo.svg" align="right" height="139"/>
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+ggchameleon allows you to write standard [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) syntax while automatically theming your plots with user-specified or algorithmically determined colors and fonts. ggchameleon balances unobtrusiveness with reprodroducibility, allowing the user to save a `chameleon.yml` file which stores customized ggplot theming without requiring the user to write extra code to fetch this theming.
+
+## Installation
+
+You can install the development version of ggchameleon from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("aarongraybill/ggchameleon")
+```
+
+## Example
+
+First, here's how a standard ggplot2 looks:
+
+```{r example}
+library(ggplot2)
+library(dplyr)
+
+set.seed(1)
+d <- diamonds |> slice_sample(n=1000)
+ggplot(d)+
+  geom_point(aes(x=carat,y=price,color=clarity))
+```
+
+Now, if we load the ggchameleon package we can immediately see a change in how the plot looks:
+
+```{r add ggchameleon}
+library(ggchameleon)
+ggplot(d)+
+  geom_point(aes(x=carat,y=price,color=clarity))
+```
+
+But the real magic of ggchameleon comes when we wish to alter the default ggchameleon parameters:
+
+```{r altering ggchameleon}
+ggchameleon:::edit_the_main_palette(main = "#FF0000")
+ggplot(d)+
+  geom_point(aes(x=carat,y=price,color=clarity))
+```
+
+`main` in the above example is the main color used throughout the plot and in the title text's color. We can edit any of the colors, but we can also edit any of the fonts, as seen below:
+
+```{r editing fonts}
+ggchameleon:::edit_the_fonts(sans="Press Start 2P")
+ggplot(d)+
+  geom_point(aes(x=carat,y=price,color=clarity))
+```
+
+We can also edit elements of the theme that we apply to each plot by default, for example:
+
+```{r editing theme}
+
+ggchameleon:::edit_the_theme(legend.position = "None")
+
+ggplot(d)+
+  geom_point(aes(x=carat,y=price,color=clarity))
+```
+
+Now that we've edited the theming to our heart's content, we can save these modifications for next time we use this project. If we run the following, we will save a file, `chameleon.yml` which will be automatically applied the next time we load this project.
+
+```{r save theme}
+ggchameleon:::save_current_theme()
+```
