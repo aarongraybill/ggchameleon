@@ -1,10 +1,4 @@
 parse_configs <- function(config = "default",file="chameleon.yml") {
-  if (!requireNamespace("config", quietly = TRUE)) {
-    stop(
-      "Package \"config\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
   if (file.exists(file)){
     configs <- config::get(config = config,file=file)
     rlang::exec("edit_the_main_palette",!!!configs$main_palette)
