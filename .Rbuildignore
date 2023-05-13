@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^gigiThemeR\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
