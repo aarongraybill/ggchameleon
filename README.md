@@ -24,26 +24,42 @@ You can install the development version of ggchameleon from
 devtools::install_github("aarongraybill/ggchameleon")
 ```
 
-## Example
+## Design Principle
+
+ggchameleon gets its name from two key design principles:
+
+1.  The chameleon’s ability to change colors at will
+2.  The chameleon’s ability to blend into the background of its
+    environment.
+
+On the color changing side, ggcchameleon allows the user to flexibly
+change theme elements (color, font, size of lines, etc.). ggchameleon is
+written to make these changes reproducible and easy to access with the
+`save_current_theme` function.
+
+However, much a like a real chameleon in dense rain forest foliage,
+ggchameleon is very hard to spot in your code! ggchameleon both reduces
+boilerplate and maintains compatability with standard `ggplot2`. In
+fact, when used as intended, the only place ggchameleon appears in your
+scripts is `library(ggchameleon)`. All of the theming is loaded on
+startup from your configurations or the package defaults. If you were to
+remove the `library(ggchameleon)` at the beginning of your code, you
+would produce plots with exactly the same information, now in the
+default ggplot theme.
+
+## Basic Usage
 
 First, here’s how a standard ggplot2 looks:
 
 ``` r
 library(ggplot2)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 
 set.seed(1)
 d <- diamonds |> slice_sample(n=1000)
 ggplot(d)+
-  geom_point(aes(x=carat,y=price,color=clarity))
+  geom_point(aes(x=carat,y=price,color=cut))+
+  ggtitle("My Cool Title")
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -78,6 +94,7 @@ also edit any of the fonts, as seen below:
 
 ``` r
 ggchameleon:::edit_the_fonts(sans="Press Start 2P")
+#> Installing Fonts
 ggplot(d)+
   geom_point(aes(x=carat,y=price,color=clarity))
 ```
@@ -104,6 +121,4 @@ automatically applied the next time we load this project.
 
 ``` r
 ggchameleon:::save_current_theme()
-#> "chameleon.yml" exists, saving as: "chameleon_a37f32814435.yml"
-#> Consider Renaming the File to Something More Relevant
 ```
