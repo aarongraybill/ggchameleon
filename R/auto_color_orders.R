@@ -1,4 +1,5 @@
-# Helpers ----
+#' Generate Maximally Differentiable Set of Palette Colors:
+#'
 gen_palette <- function(n) {
   palette <- c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)
 
@@ -37,13 +38,13 @@ gen_palette <- function(n) {
   }
 }
 
+#' Luminance Linear Color Gradient
 custom_viridis_palette <-
   function(){
     inputs <-  c(the$main_palette$main,
                  the$main_palette$intermediate,
                  the$main_palette$contrast)
-    ls <-  farver::decode_colour(inputs)
-    ls <-  farver::convert_colour(ls, 'rgb', 'lab')[,1]
+    ls <-  farver::decode_colour(inputs, to = 'lab')[,1]
     inputs <-  inputs[order(ls)]
     ls <-  ls[order(ls)]
     min_l <- min(ls)
@@ -57,6 +58,7 @@ custom_viridis_palette <-
     )
 }
 
+#' Discretized Luminance Linear Color Gradient
 custom_discrete_viridis_palette <- function(n){
   c <- custom_viridis_palette()(1:n/n)
   c[0] <- custom_viridis_palette()(0)
