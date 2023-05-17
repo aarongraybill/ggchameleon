@@ -40,7 +40,7 @@ scale_color_custom_c <-
     continuous_scale(
       aesthetics,
       "custom_c",
-      custom_viridis_palette(),
+      smart_interpolate(),
       na.value = na.value,
       guide = guide,
       ...
@@ -62,7 +62,7 @@ scale_fill_custom_c <-
     continuous_scale(
       aesthetics = "fill",
       "custom_c",
-      custom_viridis_palette(),
+      smart_interpolate(),
       na.value = na.value,
       guide = guide,
       ...
@@ -86,7 +86,7 @@ scale_color_custom_b <-
     continuous_scale(
       aesthetics = "colour",
       "custom_b",
-      custom_viridis_palette(),
+      smart_interpolate(),
       na.value = na.value,
       guide = guide,
       ...
@@ -108,7 +108,7 @@ scale_fill_custom_b <-
     continuous_scale(
       aesthetics = "fill",
       "custom_b",
-      custom_viridis_palette(),
+      smart_interpolate(),
       na.value = na.value,
       guide = guide,
       ...

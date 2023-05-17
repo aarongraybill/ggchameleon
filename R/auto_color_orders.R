@@ -98,8 +98,8 @@ smart_interpolate <- function(inputs = c(the$main_palette$main,
 
 #' Discretized Luminance Linear Color Gradient
 custom_discrete_viridis_palette <- function(n){
-  c <- custom_viridis_palette()(1:n/n)
-  c[0] <- smart_interpolate()(0)
+  c <- smart_interpolate()(1:n/n)
+  c[1] <- smart_interpolate()(0)
   c[n] <- smart_interpolate()(1)
   c
 }
