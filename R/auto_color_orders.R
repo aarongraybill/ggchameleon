@@ -58,10 +58,48 @@ custom_viridis_palette <-
     )
 }
 
+smart_interpolate <- function(inputs = c(the$main_palette$main,
+                                         the$main_palette$intermediate,
+                                         the$main_palette$contrast)){
+
+  lab <- farver::decode_colour(inputs, to = 'lab')
+  inputs <- inputs[order(lab[,1])]
+  lab <- lab[order(lab[,1]),]
+  midpoint = (lab[1,1]+lab[3,1])/2
+
+  d1 <- lab[2,1]-lab[1,1]
+  d2 <- lab[3,1]-lab[2,1]
+  closer_index = ifelse(d1<d2,1,3)
+
+  slope_a = (lab[closer_index,2]-lab[2,2])/(lab[closer_index,1]-lab[2,1])
+  int_a = lab[2,2]-lab[2,1]*slope_a
+  out_a = slope_a*midpoint + int_a
+
+  slope_b = (lab[closer_index,3]-lab[2,3])/(lab[closer_index,1]-lab[2,1])
+  int_b = lab[2,3]-lab[2,1]*slope_b
+  out_b = slope_b*midpoint + int_b
+
+  target_color_lab = matrix(c(midpoint,out_a,out_b),nrow = 1)
+  target_color_hex = farver::encode_colour(target_color_lab, from = 'lab')
+
+  inputs[2] <- target_color_hex
+  lab[2,] <- target_color_lab
+
+  fl = approxfun(c(0,.5,1),lab[,1])
+  fa = approxfun(c(0,.5,1),lab[,2])
+  fb = approxfun(c(0,.5,1),lab[,3])
+
+  function(x){
+    m <- cbind(fl(x),fa(x),fb(x))
+    return(farver::encode_colour(m,from = 'lab'))
+  }
+
+}
+
 #' Discretized Luminance Linear Color Gradient
 custom_discrete_viridis_palette <- function(n){
   c <- custom_viridis_palette()(1:n/n)
-  c[0] <- custom_viridis_palette()(0)
-  c[n] <- custom_viridis_palette()(1)
+  c[0] <- smart_interpolate()(0)
+  c[n] <- smart_interpolate()(1)
   c
 }
