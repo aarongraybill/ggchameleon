@@ -39,11 +39,11 @@ lums <- outdf %>%
 
 library(ggplot2)
 
-pal <- c("bah",'#26442E','#5A9550','#7DF279','#E7F6F4')
+pal <- c("#000D4D",'#26442E','#5A9550','#7DF279','#FFF200')
 pal[1] <- '#00000000'
 
 p <- ggplot(lums)+
-  geom_contour_filled(aes(x=x,y=y,z=lum),bins = 5)+
+  geom_contour_filled(aes(x=x,y=y,z=lum),bins = 5,linewidth=0)+
   coord_equal()+
   theme_void()+
   scale_fill_manual(values = pal)+
