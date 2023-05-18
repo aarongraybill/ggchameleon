@@ -49,17 +49,18 @@ default ggplot theme.
 
 ## Basic Usage
 
-First, here’s how a standard ggplot2 looks:
+First, here’s the look of a standard ggplot:
 
 ``` r
 library(ggplot2)
 library(dplyr)
 
-set.seed(1)
-d <- diamonds |> slice_sample(n=1000)
-ggplot(d)+
-  geom_point(aes(x=carat,y=price,color=cut))+
-  ggtitle("My Cool Title")
+d <- diamonds |> slice_sample(n = 100)
+p <- ggplot(d) +
+  geom_point(aes(x = carat, y = price, color = price)) +
+  ggtitle("My Cool & Informative Plot",
+          subtitle = "With an even cooler subtitle!")
+p
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -71,8 +72,7 @@ in how the plot looks:
 library(ggchameleon)
 #> Installing Fonts
 #> Installing Fonts
-ggplot(d)+
-  geom_point(aes(x=carat,y=price,color=clarity))
+p
 ```
 
 <img src="man/figures/README-add ggchameleon-1.png" width="100%" />
@@ -81,22 +81,22 @@ But the real magic of ggchameleon comes when we wish to alter the
 default ggchameleon parameters:
 
 ``` r
-ggchameleon:::edit_the_main_palette(main = "#FF0000")
-ggplot(d)+
-  geom_point(aes(x=carat,y=price,color=clarity))
+ggchameleon:::edit_the_main_palette(intermediate = "darkgreen")
+p
 ```
 
 <img src="man/figures/README-altering ggchameleon-1.png" width="100%" />
 
-`main` in the above example is the main color used throughout the plot
-and in the title text’s color. We can edit any of the colors, but we can
-also edit any of the fonts, as seen below:
+Notice that without having to specify a different
+`scale_color_continuous`, we were able to drastically change the colors
+of the legend. This is where ggchameleon does the heavy lifting. It
+finds the parts of your theme that use the `intermediate` color and
+updates all such instances to use the new color.
 
 ``` r
-ggchameleon:::edit_the_fonts(sans="Press Start 2P")
+ggchameleon:::edit_the_fonts(sans="Creepster")
 #> Installing Fonts
-ggplot(d)+
-  geom_point(aes(x=carat,y=price,color=clarity))
+p
 ```
 
 <img src="man/figures/README-editing fonts-1.png" width="100%" />
@@ -105,19 +105,47 @@ We can also edit elements of the theme that we apply to each plot by
 default, for example:
 
 ``` r
+ggchameleon:::edit_the_theme(legend.position = "bottom",
+                             legend.direction = "horizontal")
 
-ggchameleon:::edit_the_theme(legend.position = "None")
-
-ggplot(d)+
-  geom_point(aes(x=carat,y=price,color=clarity))
+p
 ```
 
 <img src="man/figures/README-editing theme-1.png" width="100%" />
 
+As you can see, it does not take very much work to make a very
+customized, but very ugly theme! If we wish to burn our current theme to
+the ground and start anew, ggchameleon provides two useful functions:
+
+``` r
+ggchameleon:::huemint_randomize()
+```
+
+<img src="man/figures/README-huemint and font shuffle-1.png" width="100%" />
+
+``` r
+ggchameleon:::font_shuffle()
+#> Installing Fonts
+
+p
+```
+
+<img src="man/figures/README-huemint and font shuffle-2.png" width="100%" />
+
+Your mileage may vary, especially with the font randomization, but
+ggchameleon does its best to make sure that these new random themes
+balance novelty with usability. Infinite shoutouts go to the teams at
+[Google Fonts](https://fonts.google.com/) for their fonts and
+[Huemint](https://huemint.com/) for their AI-generated color palettes
+respectively.
+
+## Wrapping Up For Next Time
+
 Now that we’ve edited the theming to our heart’s content, we can save
 these modifications for next time we use this project. If we run the
 following, we will save a file, `chameleon.yml` which will be
-automatically applied the next time we load this project.
+automatically applied the next time we load this project and use
+`library(ggchameleon)`.
 
 ``` r
 ggchameleon:::save_current_theme()
