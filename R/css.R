@@ -37,6 +37,15 @@ make_css <- function(file_name){
     c('font-family'),
     c(the$fonts$mono)
   ),
+  list(
+    'pre',
+    c('background-color',
+      'border-color'),
+    c(smart_interpolate(c(the$main_palette$black,the$main_palette$off_white,the$main_palette$white))(.95),
+      #slightly darker than off white for border
+      smart_interpolate(c(the$main_palette$black,the$main_palette$off_white,the$main_palette$white))(.7)
+      )
+  ),
   file = file_name
   )
 }
