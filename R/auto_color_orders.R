@@ -107,12 +107,13 @@ custom_discrete_viridis_palette <- function(n){
 #' Generate new colors that are maximally visibly distinct from existing colors in discrete palette
 
 pad_accent_palette <- function(length.out=10,starting_colors=c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)){
+  # Make all colors of the form #X0X0X0 (essentialy) colors in 3-digit hex
   hex_dig <- sprintf("%X0",0:15)
   all_hex <- expand.grid(hex_dig,hex_dig,hex_dig)
   all_hex <- paste0("#",all_hex$Var1,all_hex$Var2,all_hex$Var3)
   gamut <- farver::decode_colour(all_hex,to='lab')
 
-  from_lab <- decode_colour(c('#000000','#FFFFFF',starting_colors),to='lab')
+  from_lab <- farver::decode_colour(c('#000000','#FFFFFF',starting_colors),to='lab')
 
   dists <- farver::compare_colour(from = gamut,to=from_lab,from_space = 'lab',to_space = 'lab',method='cie2000')
 
