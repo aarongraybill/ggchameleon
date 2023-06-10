@@ -3,6 +3,9 @@
   showtext::showtext_auto()
   parse_configs()
   refresh_theming()
+  if (length(the$accent_palette)<10){
+    edit_the_accent_palette(pad_accent_palette(10),mode = 'append')
+  }
 }
 
 .onUnload <- function(libname,pkgname) {
