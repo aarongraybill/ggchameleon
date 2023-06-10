@@ -12,7 +12,7 @@ make_css <- function(file_name){
       )
     ),
   list(
-    'h1,h2',
+    'h1,h2,h3,h4,h5,h6',
     c(
       'color',
       'font-family'
@@ -31,6 +31,11 @@ make_css <- function(file_name){
     'a:hover',
     c('color'),
     c(the$main_palette$intermediate)
+  ),
+  list(
+    'code',
+    c('font-family'),
+    c(the$fonts$mono)
   ),
   file = file_name
   )

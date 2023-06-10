@@ -28,7 +28,8 @@ names(the$accent_palette) <- paste0("accent_",1:length(the$accent_palette))
 the$fonts <- # Must be spelled exactly as appears in google fonts
   list(sans = "Chivo Mono",
        serif = "Bitter",
-       display = "Public Sans"
+       display = "Public Sans",
+       mono = "Source Code Pro"
   )
 
 the$theme <- ggplot2::theme()
