@@ -10,7 +10,7 @@ ggchameleon allows you to write standard
 [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
 syntax while automatically theming your plots with user-specified or
 algorithmically determined colors and fonts. ggchameleon balances
-unobtrusiveness with reprodroducibility, allowing the user to save a
+unobtrusiveness with reproducibility, allowing the user to save a
 `chameleon.yml` file which stores customized ggplot theming without
 requiring the user to write extra code to fetch this theming.
 
