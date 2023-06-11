@@ -107,30 +107,36 @@ custom_discrete_viridis_palette <- function(n){
 #' Generate new colors that are maximally visibly distinct from existing colors in discrete palette
 
 pad_accent_palette <- function(length.out=10,starting_colors=c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)){
-  # Make all colors of the form #X0X0X0 (essentialy) colors in 3-digit hex
-  hex_dig <- sprintf("%X0",0:15)
-  all_hex <- expand.grid(hex_dig,hex_dig,hex_dig)
-  all_hex <- paste0("#",all_hex$Var1,all_hex$Var2,all_hex$Var3)
-  gamut <- farver::decode_colour(all_hex,to='lab')
+  print("pingo")
+  print(length(starting_colors))
+  if (length(starting_colors)>=length.out){
+    return(c())
+  } else{
+    # Make all colors of the form #X0X0X0 (essentialy) colors in 3-digit hex
+    hex_dig <- sprintf("%X0",0:15)
+    all_hex <- expand.grid(hex_dig,hex_dig,hex_dig)
+    all_hex <- paste0("#",all_hex$Var1,all_hex$Var2,all_hex$Var3)
+    gamut <- farver::decode_colour(all_hex,to='lab')
 
-  from_lab <- farver::decode_colour(c('#000000','#FFFFFF',starting_colors),to='lab')
+    from_lab <- farver::decode_colour(c('#000000','#FFFFFF',starting_colors),to='lab')
 
-  dists <- farver::compare_colour(from = gamut,to=from_lab,from_space = 'lab',to_space = 'lab',method='cie2000')
+    dists <- farver::compare_colour(from = gamut,to=from_lab,from_space = 'lab',to_space = 'lab',method='cie2000')
 
 
-  colors_needed <- length.out-length(starting_colors)
+    colors_needed <- length.out-length(starting_colors)
 
-  while (nrow(from_lab)<length.out+2){
-    score <- apply(dists,1,function(x){mean(1/x)})
-    new_color <- gamut[which.min(score),]
-    new_dist <- farver::compare_colour(from = gamut,to=matrix(new_color,ncol = 3),from_space = 'lab',to_space = 'lab',method='cie2000')
+    while (nrow(from_lab)<length.out+2){
+      score <- apply(dists,1,function(x){mean(1/x)})
+      new_color <- gamut[which.min(score),]
+      new_dist <- farver::compare_colour(from = gamut,to=matrix(new_color,ncol = 3),from_space = 'lab',to_space = 'lab',method='cie2000')
 
-    from_lab <- rbind(from_lab,new_color)
-    dists <- cbind(dists,new_dist)
+      from_lab <- rbind(from_lab,new_color)
+      dists <- cbind(dists,new_dist)
 
-  }
-  last_old_row <- length(starting_colors)+2
-  return(farver::encode_colour(from_lab[-1:-last_old_row,],from='lab') |> unname())
+    }
+    last_old_row <- length(starting_colors)+2
+    return(farver::encode_colour(matrix(from_lab[-1:-last_old_row,],ncol=3),from='lab') |> unname())
+    }
 }
 
 
