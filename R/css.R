@@ -46,6 +46,24 @@ make_css <- function(file_name){
       smart_interpolate(c(the$main_palette$black,the$main_palette$off_white,the$main_palette$white))(.7)
       )
   ),
+  # Bullets:
+  list(
+    "ul",
+    c("font-family"),
+    c(the$fonts$sans)
+  ),
+  # Numbered List:
+  list(
+    "ol",
+    c("font-family"),
+    c(the$fonts$sans)
+  ),
+  # Catchall other non-specified text:
+  list(
+    "html, body",
+    c("font-family"),
+    c(the$fonts$sans)
+  ),
   file = file_name
   )
 }
