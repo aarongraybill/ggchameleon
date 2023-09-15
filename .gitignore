@@ -5,3 +5,4 @@ bg_api_key
 data-raw/*.png
 data-raw/*.svg
 .DS_Store
+tests/TestFormatting.html
