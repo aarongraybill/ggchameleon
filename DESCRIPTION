@@ -16,15 +16,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
     colorspace,
+    config,
+    curl,
     ggplot2,
+    jsonlite,
+    knitr,
+    rmarkdown,
     spacesXYZ,
     sysfonts (>= 0.8.8),
     showtext,
-    config,
-    jsonlite,
-    rmarkdown,
-    knitr,
-    tableHTML,
-    curl
+    tableHTML
 Depends: 
     R (>= 2.10)
