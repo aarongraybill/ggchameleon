@@ -1,24 +1,30 @@
 Package: ggchameleon
-Title: Hassle-Free Theming for GGplotting!
+Title: Hassle-Free Theming for GGplotting
 Version: 0.0.0.9000
 Authors@R: 
-    person("Aaron", "Graybill", , "aarongraybill12@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Aaron", "Graybill", , "aarongraybill12@gmail.com",
+    role = c("aut", "cre"))
+Description: Automatically and consistently apply custom colors, fonts, 
+    and theme elements to plots made by the 'ggplot2' package. This is useful
+    for creating a cohesive 'brand' among charts that incorporates the same
+    elements.
+URL: https://github.com/aarongraybill/ggchameleon
+BugReports: https://github.com/aarongraybill/ggchameleon/issues
 License: `use_mit_license()`
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
     colorspace,
+    config,
+    curl,
     ggplot2,
+    jsonlite,
+    knitr,
+    rmarkdown,
     spacesXYZ,
     sysfonts (>= 0.8.8),
     showtext,
-    config,
-    jsonlite,
-    rmarkdown,
-    knitr,
-    tableHTML,
-    curl
+    tableHTML
 Depends: 
     R (>= 2.10)
