@@ -106,33 +106,59 @@ custom_discrete_viridis_palette <- function(n){
 
 # Generate new colors that are maximally visibly distinct from existing colors in discrete palette
 
-pad_accent_palette <- function(length.out=10,starting_colors=c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)){
-  if (length(starting_colors)>=length.out){
-    return(c())
-  } else{
-    # Make all colors of the form #X0X0X0 (essentialy) colors in 3-digit hex
+
+create_new_colors <-
+  function(length.out = 25,
+           starting_colors =
+             c(the$main_palette[c("main",
+                                  "secondary",
+                                  "intermediate",
+                                  'black',
+                                  'white',
+                                  'off_white')],
+               the$accent_palette)) {
+    if (length(starting_colors) >= length.out) {
+      return(c())
+    } else{
+    # Make all colors of the form #X0X0X0 (essentially) colors in 3-digit hex
     hex_dig <- sprintf("%X0",0:15)
     all_hex <- expand.grid(hex_dig,hex_dig,hex_dig)
     all_hex <- paste0("#",all_hex$Var1,all_hex$Var2,all_hex$Var3)
     gamut <- farver::decode_colour(all_hex,to='lab')
 
-    from_lab <- farver::decode_colour(c('#000000','#FFFFFF',starting_colors),to='lab')
+    from_lab <- farver::decode_colour(starting_colors,to='lab')
 
     dists <- farver::compare_colour(from = gamut,to=from_lab,from_space = 'lab',to_space = 'lab',method='cie2000')
 
+    # We add colors to the input colors until there
+    # are three more colors than we need (because we don't actually)
+    # use white, off_white, or black as marker colors
+    while (nrow(from_lab)<length.out+3){
+      # The square term here punishes colors that are very near to each other
+      # essentially eliminating them from contention
+      score <- apply(dists,1,function(x){mean(1/x^2)})
 
-    colors_needed <- length.out-length(starting_colors)
-
-    while (nrow(from_lab)<length.out+2){
-      score <- apply(dists,1,function(x){mean(1/x)})
+      # The new color for the palette is the one with the lowest score (maximal)
+      # average distance
       new_color <- gamut[which.min(score),]
+      # compute the distance from the new color to all other colors
+      # you might worry that we have to delete this new color from the rows of
+      # gamut, but we actually don't have to because the distance between
+      # the new color and itself will always be 0, so it will never
+      # be re-chosen as the maximially distinct color.
       new_dist <- farver::compare_colour(from = gamut,to=matrix(new_color,ncol = 3),from_space = 'lab',to_space = 'lab',method='cie2000')
 
+      # Add the new color to the list of lab colors
       from_lab <- rbind(from_lab,new_color)
+
+      # Add the distances of the new color to all other colors
       dists <- cbind(dists,new_dist)
 
     }
-    last_old_row <- length(starting_colors)+2
+    # We only want to output the new colors, ie the colors we didn't start with
+    # so we start remove all of the rows corresponding
+    # to the colors we already have
+    last_old_row <- length(starting_colors)
     return(farver::encode_colour(matrix(from_lab[-1:-last_old_row,],ncol=3),from='lab') |> unname())
     }
 }
