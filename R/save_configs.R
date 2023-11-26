@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-save_current_theme <- function(file="chameleon.yml"){
+save_configs <- function(file="chameleon.yml"){
   if (!requireNamespace("config", quietly = TRUE)) {
     stop(
       "Package \"config\" must be installed to use this function.",
