@@ -1,7 +1,7 @@
 .onLoad <- function(libname, pkgname) {
   the$old_theme <- ggplot2::theme_get()
   showtext::showtext_auto()
-  parse_configs()
+  load_configs()
   refresh_theming()
   #pad_accent_palette(10)
   # if (length(the$accent_palette)<10){

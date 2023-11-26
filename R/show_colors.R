@@ -1,5 +1,35 @@
-#' Show the philly color pallete, or basically any color pallette
-#' Stolen from scales::show_col with the modification to allow for named color lists
+#' Show a list of colors and their names
+#'
+#' `show_colors()` is a modified version of [scales::show_col()] that
+#' incorporates the names of colors into a tile grid of colors. This is useful
+#' to quickly see if a set of colors works well together. When called with no
+#' arguments, `show_colors` will create a plot containing with all of the colors
+#' stored in the ggchameleon current configuration, stored in [the].
+#' Alternately, if the `colours` argument is specified, an arbitrary vector of
+#' colors can be shown.
+#'
+#' @param colours A named or unnamed vector of colors. Defaults to the colors
+#'   currently stored in [the].
+#' @param labels A boolean. Include color names (when named) or color codes
+#'   (when unnamed)? Defaults to `TRUE`.
+#' @param borders The color of the border around each color tile. Defaults to
+#'   the value of `par("fg")` (likely `"black"`).
+#' @param cex_label Size of printed labels, as multiplier of default size.
+#' @param ncol Number of columns. If not supplied, tries to be as square as
+#'   possible.
+#'
+#' @examples
+#' # Show the colors currently stored in `the`.
+#' show_colors()
+#'
+#' # Show a custom vector of colors, some named, some unnamed.
+#' # Only named colored are labeled.
+#' show_colors(c("my_black"="#000000","#FF00FF","maroon"))
+#'
+#' # If no names are specified, then the
+#' # strings representing the colors are shown.
+#' show_colors(c("black","#888888","white"))
+#'
 #' @export
 
 show_colors <-

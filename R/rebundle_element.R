@@ -1,10 +1,4 @@
-#' Title
-#'
-#' @param named_list
-#'
-#' @return
-#'
-#' @examples
+# Takes yml input and converts it to usable ggplot::theme arguments
 rebundle_element <- function(named_list){
 
   if (length(named_list)==1){return(named_list)}
