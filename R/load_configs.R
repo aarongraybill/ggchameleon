@@ -17,7 +17,7 @@
 #' specify this style across the multiple files in your project.
 #'
 #' @param config Within `file`, which configuration to use. Defaults to
-#'   `"default"`. Useful if mutliple versions of the same theme are stored in
+#'   `"default"`. Useful if multiple versions of the same theme are stored in
 #'   one configuration file.
 #' @param file A .yml file. The configuration file to load. Should be created by
 #'   [save_current_theme()]. Defaults to `chameleon.yml`.
