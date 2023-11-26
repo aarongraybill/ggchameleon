@@ -1,6 +1,4 @@
-#' Custom Knit function for RStudio
-#'
-#' @export
+# Custom Knit function for RStudio
 knit_with_chameleon <- function(input, ...) {
   # Get default parameters specified by rmarkdown::render
   default_args <- formals(rmarkdown::render)
