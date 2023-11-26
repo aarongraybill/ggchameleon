@@ -8,11 +8,15 @@
 #' Alternately, if the `colours` argument is specified, an arbitrary vector of
 #' colors can be shown.
 #'
-#' @param colours A named or unnamed vector of colors. Defaults to the colors currently stored in [the].
-#' @param labels A boolean. Include color names (when named) or color codes (when unnamed)? Defaults to `TRUE`.
-#' @param borders The color of the border around each color tile. Defaults to the value of `par("fg")` (likely `"black"`).
+#' @param colours A named or unnamed vector of colors. Defaults to the colors
+#'   currently stored in [the].
+#' @param labels A boolean. Include color names (when named) or color codes
+#'   (when unnamed)? Defaults to `TRUE`.
+#' @param borders The color of the border around each color tile. Defaults to
+#'   the value of `par("fg")` (likely `"black"`).
 #' @param cex_label Size of printed labels, as multiplier of default size.
-#' @param ncol Number of columns. If not supplied, tries to be as square as possible.
+#' @param ncol Number of columns. If not supplied, tries to be as square as
+#'   possible.
 #'
 #' @examples
 #' # Show the colors currently stored in `the`.

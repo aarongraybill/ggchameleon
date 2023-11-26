@@ -13,15 +13,19 @@ show_colors(
 )
 }
 \arguments{
-\item{colours}{A named or unnamed vector of colors. Defaults to the colors currently stored in \link{the}.}
+\item{colours}{A named or unnamed vector of colors. Defaults to the colors
+currently stored in \link{the}.}
 
-\item{labels}{A boolean. Include color names (when named) or color codes (when unnamed)? Defaults to \code{TRUE}.}
+\item{labels}{A boolean. Include color names (when named) or color codes
+(when unnamed)? Defaults to \code{TRUE}.}
 
-\item{borders}{The color of the border around each color tile. Defaults to the value of \code{par("fg")} (likely \code{"black"}).}
+\item{borders}{The color of the border around each color tile. Defaults to
+the value of \code{par("fg")} (likely \code{"black"}).}
 
 \item{cex_label}{Size of printed labels, as multiplier of default size.}
 
-\item{ncol}{Number of columns. If not supplied, tries to be as square as possible.}
+\item{ncol}{Number of columns. If not supplied, tries to be as square as
+possible.}
 }
 \description{
 \code{show_colors()} is a modified version of \code{\link[scales:show_col]{scales::show_col()}} that
