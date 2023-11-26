@@ -1,4 +1,4 @@
-parse_configs <- function(config = "default",file="chameleon.yml") {
+load_configs <- function(config = "default",file="chameleon.yml") {
   if (file.exists(file)){
     configs <- config::get(config = config,file=file)
     rlang::exec("edit_the_main_palette",!!!configs$main_palette)
