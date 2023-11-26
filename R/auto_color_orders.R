@@ -104,7 +104,7 @@ custom_discrete_viridis_palette <- function(n){
   c
 }
 
-#' Generate new colors that are maximally visibly distinct from existing colors in discrete palette
+# Generate new colors that are maximally visibly distinct from existing colors in discrete palette
 
 pad_accent_palette <- function(length.out=10,starting_colors=c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)){
   if (length(starting_colors)>=length.out){
