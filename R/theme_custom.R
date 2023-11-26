@@ -1,14 +1,3 @@
-#' Add Custom Theme to a ggplot
-#'
-#' @description This function is used exactly like a regular ggplot2 theme object. It can be added to a ggplot to change the stylistic elements of a plot
-#' @param base_size base font size
-#' @param base_family base font family, defaults to COMPLETE THIS
-#' @param base_line_size bae size for line elements
-#' @param base_rect_size base size for rect elements
-#' @return A ggplot2 theme object used to update a ggplot2 plot.
-#' @details You cannot directly edit any other theme elements. This function returns a complete theme, and if you wish to further modify you should use the [ggplot2::theme()] command
-#' @export
-#'
 theme_custom <-
   function (base_size = 11,
             base_family = "",
