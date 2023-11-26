@@ -2,40 +2,59 @@
 #'
 gen_palette <- function(n) {
   palette <- c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)
+  extra_colors <- c()
 
-  if (length(palette) < n) {
-    warning("There will repeated colors")
-    return(rep_len(palette |> unlist() |>  as.vector(), n))
-  }
-  if (n > 5) {
-    warning("These colors won't be super differentiable beware")
-  }
-  if (length(palette) == n) {
-    return(unname(unlist(palette)))
-  }
   if (n==1){
     return(the$main_palette$main)
   }
-  else{
-    ls <-  farver::decode_colour(palette)
-    ls <-  farver::convert_colour(ls, 'rgb', 'lab')
-    diffs = matrix(nrow = length(palette), ncol = length(palette))
-    for (i in 1:nrow(ls)) {
-      diffs[i, ] = spacesXYZ::DeltaE(ls[i, ], ls,metric = "2000")
-    }
-    colnames(diffs) <- names(palette)
-    rownames(diffs) <- names(palette)
 
-    colors <- c('main', 'secondary')
-    new_vec = colMeans(diffs[colors, setdiff(names(palette), colors)])
-    while (length(colors) < n) {
-      new_col = names(new_vec)[which.max(new_vec)]
-      colors = c(colors, new_col)
-      new_vec =
-        colMeans(as.matrix(diffs[colors, setdiff(names(palette), colors)]))
-    }
-    return(palette[colors] |> unlist() |> unname())
+  if (length(palette) < n) {
+    extra_colors <-
+      create_new_colors(length.out = n,
+                                    starting_colors = c(
+                                      palette,
+                                      the$main_palette[
+                                        c('black',
+                                          'white',
+                                          'off_white')]
+                                      )) |>
+      as.vector()
+
+
+    names(extra_colors) <- paste0("extra_",1:length(extra_colors))
   }
+
+  # Convert colors to lab space for easier color math
+  palette <- c(palette,extra_colors)
+  ls <-  farver::decode_colour(palette,to = "lab")
+
+  # Compute distances between all colors
+  # creates a symmetric matrix
+  diffs <- farver::compare_colour(from = ls,to=ls,from_space = 'lab',to_space = 'lab',method='cie2000')
+
+  # Higher score is a worse match for the colors already included
+  scores <- 1/diffs^2
+
+  # The first two colors we always want to include
+  colors <- c('main', 'secondary')
+
+  # We subset the scores matrix so that it has only the rows
+  # from `colors` and only the columns that *aren't* in `colors`
+  # when we take the column means, that gives us the average score of every
+  # other color compared to the colors we've already selected
+  new_vec = colMeans(scores[colors, setdiff(names(palette), colors)])
+  # Continue adding to `colors` until we have enough
+  while (length(colors) < n) {
+    # Select which of the colmeans has the lowest score
+    new_col = names(which.min(new_vec))
+    # Add that optimal color to the `colors` list
+    colors = c(colors, new_col)
+
+    # New badness scores include the newly found color as a row, not a column
+    new_vec =
+      colMeans(scores[colors, setdiff(names(palette), colors), drop = FALSE])
+  }
+  return(palette[colors] |> unlist() |> unname())
 }
 
 #' Luminance Linear Color Gradient
@@ -106,33 +125,59 @@ custom_discrete_viridis_palette <- function(n){
 
 # Generate new colors that are maximally visibly distinct from existing colors in discrete palette
 
-pad_accent_palette <- function(length.out=10,starting_colors=c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)){
-  if (length(starting_colors)>=length.out){
-    return(c())
-  } else{
-    # Make all colors of the form #X0X0X0 (essentialy) colors in 3-digit hex
+
+create_new_colors <-
+  function(length.out = 25,
+           starting_colors =
+             c(the$main_palette[c("main",
+                                  "secondary",
+                                  "intermediate",
+                                  'black',
+                                  'white',
+                                  'off_white')],
+               the$accent_palette)) {
+    if (length(starting_colors)-3 >= length.out) {
+      return(c())
+    } else{
+    # Make all colors of the form #X0X0X0 (essentially) colors in 3-digit hex
     hex_dig <- sprintf("%X0",0:15)
     all_hex <- expand.grid(hex_dig,hex_dig,hex_dig)
     all_hex <- paste0("#",all_hex$Var1,all_hex$Var2,all_hex$Var3)
     gamut <- farver::decode_colour(all_hex,to='lab')
 
-    from_lab <- farver::decode_colour(c('#000000','#FFFFFF',starting_colors),to='lab')
+    from_lab <- farver::decode_colour(starting_colors,to='lab')
 
     dists <- farver::compare_colour(from = gamut,to=from_lab,from_space = 'lab',to_space = 'lab',method='cie2000')
 
+    # We add colors to the input colors until there
+    # are three more colors than we need (because we don't actually)
+    # use white, off_white, or black as marker colors
+    while (nrow(from_lab)<length.out+3){
+      # The square term here punishes colors that are very near to each other
+      # essentially eliminating them from contention
+      score <- apply(dists,1,function(x){mean(1/x^2)})
 
-    colors_needed <- length.out-length(starting_colors)
-
-    while (nrow(from_lab)<length.out+2){
-      score <- apply(dists,1,function(x){mean(1/x)})
+      # The new color for the palette is the one with the lowest score (maximal)
+      # average distance
       new_color <- gamut[which.min(score),]
+      # compute the distance from the new color to all other colors
+      # you might worry that we have to delete this new color from the rows of
+      # gamut, but we actually don't have to because the distance between
+      # the new color and itself will always be 0, so it will never
+      # be re-chosen as the maximially distinct color.
       new_dist <- farver::compare_colour(from = gamut,to=matrix(new_color,ncol = 3),from_space = 'lab',to_space = 'lab',method='cie2000')
 
+      # Add the new color to the list of lab colors
       from_lab <- rbind(from_lab,new_color)
+
+      # Add the distances of the new color to all other colors
       dists <- cbind(dists,new_dist)
 
     }
-    last_old_row <- length(starting_colors)+2
+    # We only want to output the new colors, ie the colors we didn't start with
+    # so we start remove all of the rows corresponding
+    # to the colors we already have
+    last_old_row <- length(starting_colors)
     return(farver::encode_colour(matrix(from_lab[-1:-last_old_row,],ncol=3),from='lab') |> unname())
     }
 }
