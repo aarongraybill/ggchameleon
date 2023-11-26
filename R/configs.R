@@ -1,5 +1,34 @@
-#' @export
+#' Current configurations for ggplot2 styling
 #'
+#' `the` is an object that contains the fonts, colors, theme customizations
+#' implemented by the ggchameleon package. `the` should not be edited directly,
+#' and is updated automatically when one of the following is run:
+#' * [edit_the_main_palette()],
+#' * [edit_the_accent_palette()],
+#' * [edit_the_fonts()]
+#' * [edit_the_theme()]
+#'
+#' `the` is named as such because it's intended to be used in the way that the
+#' English word "the" is used. For example, if you would like the main color
+#' used in your ggchameleon theme, you can write `the$main_palette$main`. This
+#' idea comes from  the suggestion
+#' [here](https://r-pkgs.org/data.html#sec-data-state)
+#'
+#' `the` is useful if you need to reference the elements of your theme in other
+#' parts of your code. For example if you wanted to change the color of a base R
+#' chart, you could get the color selections from `the`
+#'
+#' @examples
+#' # Using Default base R colors
+#' plot(cars)
+#' # Using the current secondary color
+#' plot(cars,col=the$main_palette$secondary)
+#' # Editing the secondary color to pink
+#' edit_the_main_palette(secondary="#FF00FF")
+#' # New plot automatically updates `the` to pink
+#' plot(cars,col=the$main_palette$secondary)
+#'
+#' @export
 the <- new.env(parent = emptyenv())
 
 the$main_palette <-
