@@ -64,7 +64,40 @@ the$fonts <- # Must be spelled exactly as appears in google fonts
   )
 
 the$theme <- ggplot2::theme()
-
+#' Modify the primary colors used in your charts
+#'
+#' `edit_the_main_palette()` allows you to change the colors that automatically
+#' appear in your ggplots. When you edit a color, ggchameleon will figure out
+#' where those new colors should appear in your charts. ggchameleon will not
+#' only update the text colors, but also the default colors of the geometries
+#' (the shapes that appear in the chart) when applicable. You can edit one or
+#' more parameters at a time. After editing parameters, the updated values are
+#' stored in [the].
+#'
+#' @param main The primary color used for title text and appearing whenever
+#'   possible in charts
+#' @param secondary A color that should notably contrast the `main` color
+#' @param white The whitest color that will appear in your charts
+#' @param off_white The color used for grid lines, subtly differentiable from
+#'   `white`
+#' @param black The darkest color that will appear in your plots
+#' @param contrast A color that is **very** differentiable from `main`. Used
+#'   whenever there is a continuous color gradient
+#' @param intermediate A color to appear between `main` and `contrast` in
+#'   continuous gradients
+#'
+#' @examples
+#' # Editing one parameter at a time
+#' # converts the main color to magenta (pink)
+#' edit_the_main_palette(main="magenta")
+#' # Editing multiple elements
+#' # continuous gradients now go from green to gray to magenta
+#' edit_the_main_palette(contrast="darkolivegreen",intermediate="gray50")
+#'
+#' # our changes are also reflected in `the`
+#' the$main_palette
+#'
+#' @export
 edit_the_main_palette <- function(...) {
   args <- list(...)
   found = intersect(names(args), names(the$main_palette))
