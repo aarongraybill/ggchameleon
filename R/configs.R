@@ -195,6 +195,27 @@ edit_the_fonts <- function(...) {
   refresh_theming()
 }
 
+#' Specify a custom ggplot2 plot layout
+#'
+#' With `edit_the_theme`, anything that can be modified with [ggplot2::theme()]
+#' syntax can be set as a default under the ggchameleon framework. The syntax of
+#' `edit_the_theme` mirrors that of [ggplot2::theme()]. You can customize layout
+#' parameters by customizing options like `legend.position`, or you can
+#' customize options related to aesthetics, like the font or colors.
+#' Importantly, `edit_the_theme` is unable to customize the "geometries" (the
+#' shapes representing the data), this is purely the supplemental shapes of a
+#' ggplot.
+#'
+#' @param ... Arguments to [ggplot2::theme()]
+#'
+#' @examples
+#' # Places the legend at the bottom by default.
+#' edit_the_theme(legend.position='bottom')
+#'
+#' # Change the title text color to the secondary color
+#' edit_the_theme(title = element_text(color = the$main_palette$secondary))
+#'
+#' @export
 edit_the_theme <- function(...){
   args <- list(...)
   bundled_args <- lapply(args,rebundle_element)
