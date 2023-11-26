@@ -2,40 +2,59 @@
 #'
 gen_palette <- function(n) {
   palette <- c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)
+  extra_colors <- c()
 
-  if (length(palette) < n) {
-    warning("There will repeated colors")
-    return(rep_len(palette |> unlist() |>  as.vector(), n))
-  }
-  if (n > 5) {
-    warning("These colors won't be super differentiable beware")
-  }
-  if (length(palette) == n) {
-    return(unname(unlist(palette)))
-  }
   if (n==1){
     return(the$main_palette$main)
   }
-  else{
-    ls <-  farver::decode_colour(palette)
-    ls <-  farver::convert_colour(ls, 'rgb', 'lab')
-    diffs = matrix(nrow = length(palette), ncol = length(palette))
-    for (i in 1:nrow(ls)) {
-      diffs[i, ] = spacesXYZ::DeltaE(ls[i, ], ls,metric = "2000")
-    }
-    colnames(diffs) <- names(palette)
-    rownames(diffs) <- names(palette)
 
-    colors <- c('main', 'secondary')
-    new_vec = colMeans(diffs[colors, setdiff(names(palette), colors)])
-    while (length(colors) < n) {
-      new_col = names(new_vec)[which.max(new_vec)]
-      colors = c(colors, new_col)
-      new_vec =
-        colMeans(as.matrix(diffs[colors, setdiff(names(palette), colors)]))
-    }
-    return(palette[colors] |> unlist() |> unname())
+  if (length(palette) < n) {
+    extra_colors <-
+      create_new_colors(length.out = n,
+                                    starting_colors = c(
+                                      palette,
+                                      the$main_palette[
+                                        c('black',
+                                          'white',
+                                          'off_white')]
+                                      )) |>
+      as.vector()
+
+
+    names(extra_colors) <- paste0("extra_",1:length(extra_colors))
   }
+
+  # Convert colors to lab space for easier color math
+  palette <- c(palette,extra_colors)
+  ls <-  farver::decode_colour(palette,to = "lab")
+
+  # Compute distances between all colors
+  # creates a symmetric matrix
+  diffs <- farver::compare_colour(from = ls,to=ls,from_space = 'lab',to_space = 'lab',method='cie2000')
+
+  # Higher score is a worse match for the colors already included
+  scores <- 1/diffs^2
+
+  # The first two colors we always want to include
+  colors <- c('main', 'secondary')
+
+  # We subset the scores matrix so that it has only the rows
+  # from `colors` and only the columns that *aren't* in `colors`
+  # when we take the column means, that gives us the average score of every
+  # other color compared to the colors we've already selected
+  new_vec = colMeans(scores[colors, setdiff(names(palette), colors)])
+  # Continue adding to `colors` until we have enough
+  while (length(colors) < n) {
+    # Select which of the colmeans has the lowest score
+    new_col = names(which.min(new_vec))
+    # Add that optimal color to the `colors` list
+    colors = c(colors, new_col)
+
+    # New badness scores include the newly found color as a row, not a column
+    new_vec =
+      colMeans(scores[colors, setdiff(names(palette), colors), drop = FALSE])
+  }
+  return(palette[colors] |> unlist() |> unname())
 }
 
 #' Luminance Linear Color Gradient
@@ -117,7 +136,7 @@ create_new_colors <-
                                   'white',
                                   'off_white')],
                the$accent_palette)) {
-    if (length(starting_colors) >= length.out) {
+    if (length(starting_colors)-3 >= length.out) {
       return(c())
     } else{
     # Make all colors of the form #X0X0X0 (essentially) colors in 3-digit hex
