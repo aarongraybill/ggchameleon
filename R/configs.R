@@ -115,6 +115,29 @@ edit_the_main_palette <- function(...) {
   refresh_theming()
 }
 
+#' Modify supplemental colors in theme
+#'
+#' The accent palette contains an arbitrary number of additional colors for your
+#' theme that can be used when coloring discrete/categorical variables. The
+#' accent palette does not have meaningful names or an order. Because of this,
+#' by default, `edit_the_accent_palette` overwrites *the entire* existing accent
+#' palette. You can append to the existing list by using `mode = 'append'`
+#' argument. Behind the scenes, ggchameleon figures out which colors are most
+#' differentiable, and includes those in your chart.
+#'
+#' @param ... A vector or comma-separated list of colors
+#' @param mode `"overwrite"` (the default), removes all existing accent colors
+#'   and replace them with `...`. The `"append"` option leaves all existing
+#'   colors and adds every color specified in `...`.
+#'
+#' @examples
+#' # Add additional colors to the accent palette
+#' edit_the_accent_palette("tomato","powderblue",mode="append")
+#'
+#' # Overwrite the existing accent colors and replace with new colors
+#' edit_the_accent_palette(c("orchid","lavender","violet","goldenrod"))
+#'
+#' @export
 edit_the_accent_palette <-
   function(..., mode = c("overwrite", "append")) {
     mode <- match.arg(mode)
