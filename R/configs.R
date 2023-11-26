@@ -161,6 +161,23 @@ edit_the_accent_palette <-
 refresh_theming()
   }
 
+#' Use custom fonts from Google Fonts
+#'
+#' `edit_the_fonts` allows you specify any fonts available in the [Google Fonts](https://fonts.google.com/)
+#' library as fonts for your ggchameleon theme. You can specify different fonts depending on which part of the
+#' chart you are interested in modifying. `edit_the_fonts` defers to [sysfonts::font_add_google()] for finding and installing
+#' Google fonts.
+#'
+#' @param sans The most legible font, used for the smaller elements, axis labels, legend, etc.
+#' @param display The most distinctive font. Used for the title.
+#' @param serif Used in the subtitle.
+#' @param mono A "monospace" font. Used whenever code needs to be displayed.
+#'
+#' @examples
+#' # Changes the title font to the "Lobster" font family
+#' edit_the_fonts(display="Lobster")
+#'
+#' @export
 edit_the_fonts <- function(...) {
   args <- list(...)
   found = intersect(names(args), names(the$fonts))
