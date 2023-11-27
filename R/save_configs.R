@@ -15,6 +15,9 @@
 #' ggplot2, it will automatically start using whatever you have saved.
 #'
 #' @param file A file path ending in `".yml"`. Defaults to `"chameleon.yml"`.
+#' @param overwrite A boolean. Whether or not to overwrite `file` if it exists.
+#'   Defaults to `FALSE`. When `FALSE`, `file` will have random characters
+#'   appended to the end of the name to disambiguate.
 #'
 #' @examples
 #'
@@ -25,20 +28,23 @@
 #' save_configs("my_different_configs.yml")
 #'
 #' @export
-save_configs <- function(file="chameleon.yml"){
-  if (!requireNamespace("config", quietly = TRUE)) {
-    stop(
-      "Package \"config\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
+save_configs <- function(file="chameleon.yml",overwrite=FALSE){
 
-  while (file.exists(file)){
-    new_file <- tempfile("chameleon_",tmpdir = "",fileext = ".yml")
-    new_file <- substr(new_file,2,nchar(new_file))
-    message(paste0("\"",file,"\" exists, saving as: \"", new_file,
-                   "\"\nConsider Renaming the File to Something More Relevant"))
-    file <- new_file
+  yml_exists <- file.exists(file)
+
+  if (!yml_exists){
+    yaml::write_yaml(list(ggchameleon_configs=as.list(the)),file)
+    message("Configurations saved to \"",file,"\".")
+  } else if (!overwrite){
+    parent_dir <- dirname(file)
+    parent_dir <- gsub("^\\.$","",parent_dir)
+    file_name <- tools::file_path_sans_ext(basename(file)) |> paste0("_")
+    new_file <- tempfile(file_name,tmpdir = parent_dir,fileext = '.yml')
+    yaml::write_yaml(list(ggchameleon_configs=as.list(the)),new_file)
+    message(paste0("The file \"",file,"\" exists, saving as: \"", new_file,
+                   "\".\nConsider renaming this to something more relevant."))
+  } else {
+    yaml::write_yaml(list(ggchameleon_configs=as.list(the)),file)
+    message("Configurations overwritten at \"",file,"\".")
   }
-  yaml::write_yaml(list(default = as.list(the)),file)
 }

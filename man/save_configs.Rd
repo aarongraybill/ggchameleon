@@ -4,10 +4,14 @@
 \alias{save_configs}
 \title{Save stylistic configurations to a file for later use}
 \usage{
-save_configs(file = "chameleon.yml")
+save_configs(file = "chameleon.yml", overwrite = FALSE)
 }
 \arguments{
 \item{file}{A file path ending in \code{".yml"}. Defaults to \code{"chameleon.yml"}.}
+
+\item{overwrite}{A boolean. Whether or not to overwrite \code{file} if it exists.
+Defaults to \code{FALSE}. When \code{FALSE}, \code{file} will have random characters
+appended to the end of the name to disambiguate.}
 }
 \description{
 If you are happy with your current chart style, and you wish to use it again
