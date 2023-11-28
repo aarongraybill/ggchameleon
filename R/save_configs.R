@@ -33,18 +33,17 @@ save_configs <- function(file="chameleon.yml",overwrite=FALSE){
   yml_exists <- file.exists(file)
 
   if (!yml_exists){
-    yaml::write_yaml(list(ggchameleon_configs=as.list(the)),file)
+    yaml::write_yaml(as.list(the),file)
     message("Configurations saved to \"",file,"\".")
   } else if (!overwrite){
     parent_dir <- dirname(file)
-    parent_dir <- gsub("^\\.$","",parent_dir)
     file_name <- tools::file_path_sans_ext(basename(file)) |> paste0("_")
     new_file <- tempfile(file_name,tmpdir = parent_dir,fileext = '.yml')
-    yaml::write_yaml(list(ggchameleon_configs=as.list(the)),new_file)
+    yaml::write_yaml(as.list(the),new_file)
     message(paste0("The file \"",file,"\" exists, saving as: \"", new_file,
                    "\".\nConsider renaming this to something more relevant."))
   } else {
-    yaml::write_yaml(list(ggchameleon_configs=as.list(the)),file)
+    yaml::write_yaml(as.list(the),file)
     message("Configurations overwritten at \"",file,"\".")
   }
 }

@@ -16,20 +16,18 @@
 #' the charts in this project will have a cohesive style without you having to
 #' specify this style across the multiple files in your project.
 #'
-#' @param config Within `file`, which configuration to use. Defaults to
-#'   `"default"`. Useful if multiple versions of the same theme are stored in
-#'   one configuration file.
 #' @param file A .yml file. The configuration file to load. Should be created by
 #'   [save_configs()]. Defaults to `chameleon.yml`.
 #'
 #' @export
-load_configs <- function(config = "default",file="chameleon.yml") {
+load_configs <- function(file="chameleon.yml") {
   if (file.exists(file)){
-    configs <- config::get(config = config,file=file)
+    configs <- yaml::read_yaml(file)
     rlang::exec("edit_the_main_palette",!!!configs$main_palette)
     rlang::exec("edit_the_accent_palette",!!!configs$accent_palette)
     rlang::exec("edit_the_fonts",!!!configs$fonts)
     rlang::exec("edit_the_theme",!!!configs$theme)
+    message("Loading configurations stored in \"",file,"\".")
   } else if (file!="chameleon.yml"){
     message(paste0("File \"",file,"\" not found. Resorting to existing. configs."))
   } else{
