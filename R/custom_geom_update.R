@@ -1,21 +1,21 @@
 custom_geom_update <- function(){
   line_size = 1
-  update_geom_defaults(
+  ggplot2::update_geom_defaults(
     "point", list(color=the$main_palette$black)
   )
-  update_geom_defaults(
+  ggplot2::update_geom_defaults(
     "line", list(color=the$main_palette$black,size=line_size)
   )
-  update_geom_defaults(
+  ggplot2::update_geom_defaults(
     "bar", list(color=the$main_palette$black,fill=alpha_gradient(.5),size=line_size)
   )
-  update_geom_defaults(
+  ggplot2::update_geom_defaults(
     "smooth",list(color = alpha_gradient(.5),fill=the$main_palette$off_white) # transparent
   )
-  update_geom_defaults(
+  ggplot2::update_geom_defaults(
     "abline",list(color = the$main_palette$black,size=line_size)
   )
-  update_geom_defaults(
+  ggplot2::update_geom_defaults(
     "density2d", list(color=the$main_palette$main,size=.75*line_size)
   )
 }
