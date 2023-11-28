@@ -38,12 +38,11 @@ huemint_randomize <- function(verbose=TRUE){
     )
   }
 
-  library(httr)
-  result <- POST("https://api.huemint.com/color",
+  result <- httr::POST("https://api.huemint.com/color",
                  body = main_palette_payload,
-                 add_headers(.headers = c("Content-Type"="application/json")),
+                 httr::add_headers(.headers = c("Content-Type"="application/json")),
                  encode = "json")
-  out <- content(result)
+  out <- httr::content(result)
   custom_specs[custom_specs==0] <- NA
   scores <- lapply(out$results,function(x){mean((create_diff_matrix(x$palette)-custom_specs)^2,na.rm=T)})
 
@@ -51,11 +50,11 @@ huemint_randomize <- function(verbose=TRUE){
   names(main_palette_edits) <- c("main","secondary","white","off_white","black","contrast","intermediate")
   rlang::exec(edit_the_main_palette,!!!main_palette_edits)
 
-  result <- POST("https://api.huemint.com/color",
+  result <- httr::POST("https://api.huemint.com/color",
                  body = accent_palette_payload(the$main_palette$main,the$main_palette$secondary),
-                 add_headers(.headers = c("Content-Type"="application/json")),
+                 httr::add_headers(.headers = c("Content-Type"="application/json")),
                  encode = "json")
-  out <- content(result)
+  out <- httr::content(result)
   new_accents <- out$results[[1]]$palette[-c(1:2)]
   rlang::exec(edit_the_accent_palette,!!!new_accents)
 
