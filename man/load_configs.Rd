@@ -4,13 +4,9 @@
 \alias{load_configs}
 \title{Load stylistic configurations from a file}
 \usage{
-load_configs(config = "default", file = "chameleon.yml")
+load_configs(file = "chameleon.yml")
 }
 \arguments{
-\item{config}{Within \code{file}, which configuration to use. Defaults to
-\code{"default"}. Useful if multiple versions of the same theme are stored in
-one configuration file.}
-
 \item{file}{A .yml file. The configuration file to load. Should be created by
 \code{\link[=save_configs]{save_configs()}}. Defaults to \code{chameleon.yml}.}
 }

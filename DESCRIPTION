@@ -16,7 +16,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
     colorspace,
-    config,
     curl,
     ggplot2,
     jsonlite,
@@ -25,6 +24,7 @@ Imports:
     spacesXYZ,
     sysfonts (>= 0.8.8),
     showtext,
-    tableHTML
+    tableHTML,
+    yaml
 Depends: 
     R (>= 2.10)
