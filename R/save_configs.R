@@ -32,18 +32,22 @@ save_configs <- function(file="chameleon.yml",overwrite=FALSE){
 
   yml_exists <- file.exists(file)
 
+  # We don't care about what theme the user had prior
+  # to using ggchameleon
+  to_write <- as.list(the)[names(the)!='old_theme']
+
   if (!yml_exists){
-    yaml::write_yaml(as.list(the),file)
+    yaml::write_yaml(to_write,file)
     message("Configurations saved to \"",file,"\".")
   } else if (!overwrite){
     parent_dir <- dirname(file)
     file_name <- tools::file_path_sans_ext(basename(file)) |> paste0("_")
     new_file <- tempfile(file_name,tmpdir = parent_dir,fileext = '.yml')
-    yaml::write_yaml(as.list(the),new_file)
+    yaml::write_yaml(to_write,new_file)
     message(paste0("The file \"",file,"\" exists, saving as: \"", new_file,
                    "\".\nConsider renaming this to something more relevant."))
   } else {
-    yaml::write_yaml(as.list(the),file)
+    yaml::write_yaml(to_write,file)
     message("Configurations overwritten at \"",file,"\".")
   }
 }
