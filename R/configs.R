@@ -206,7 +206,7 @@ edit_the_fonts <- function(...) {
 #' shapes representing the data), this is purely the supplemental shapes of a
 #' ggplot.
 #'
-#' @param ... Arguments to [ggplot2::theme()]
+#' @inheritDotParams ggplot2::theme
 #'
 #' @examples
 #' # Places the legend at the bottom by default.
