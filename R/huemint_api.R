@@ -1,3 +1,18 @@
+#' Randomize Colors to a (Usually) Pleasant Palette
+#'
+#' @description
+#' `huemint_randomize` *overwrites* the existing colors in [the] (the
+#' environment that stores your current configurations). `huemint_randomize`
+#' leverages [https://huemint.com/] to generate the new color palette. Huemint
+#' uses machine learning to create color palettes that are novel and appealing.
+#' You can read more about that process [here](https://huemint.com/about/).
+#'
+#' `huemint_randomize` imposes further restrictions on the generated palette---
+#' requiring certain colors to be more and less differentiable. For example the
+#' generated black should look very different from the generated white.
+#'
+#' @param verbose   A boolean. Whether or not to preview the new palette. Defaults
+#'   to `TRUE`.
 huemint_randomize <- function(verbose=TRUE){
 
   if (!curl::has_internet()) {
