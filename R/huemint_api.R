@@ -14,7 +14,7 @@
 #' @param auto_accept A boolean. Whether or not to accept the new colors without
 #'   user confirmation. Defaults to `FALSE`.
 #'
-#' @param show_colors   A boolean. Whether or not to preview the new palette.
+#' @param show_colors A boolean. Whether or not to preview the new palette.
 #'   Defaults to `TRUE`.
 huemint_randomize <- function(auto_accept = FALSE, show_colors = TRUE){
 
