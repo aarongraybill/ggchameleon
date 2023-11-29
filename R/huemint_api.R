@@ -11,9 +11,20 @@
 #' requiring certain colors to be more and less differentiable. For example the
 #' generated black should look very different from the generated white.
 #'
-#' @param verbose   A boolean. Whether or not to preview the new palette. Defaults
-#'   to `TRUE`.
-huemint_randomize <- function(verbose=TRUE){
+#' @param auto_accept A boolean. Whether or not to accept the new colors without
+#'   user confirmation. Defaults to `FALSE`.
+#'
+#' @param verbose   A boolean. Whether or not to preview the new palette.
+#'   Defaults to `TRUE`.
+huemint_randomize <- function(auto_accept = FALSE, verbose = TRUE){
+
+  # You can't provide consent without seeing the palette
+  if (!auto_accept & !verbose){
+    message("The option ‘auto_accept = FALSE’ requires that you preview",
+            " the colors to make your selection.",
+            " As such, the option ‘verbose = TRUE’ will be enabled.")
+    verbose <- TRUE
+  }
 
   if (!curl::has_internet()) {
     warning("No internet connection, keeping existing colors palettes")
@@ -68,7 +79,6 @@ huemint_randomize <- function(verbose=TRUE){
 
   main_palette_edits <- out$results[[which.min(scores)]]$palette
   names(main_palette_edits) <- c("main","secondary","white","off_white","black","contrast","intermediate")
-  rlang::exec(edit_the_main_palette,!!!main_palette_edits)
 
   result <- httr::POST("https://api.huemint.com/color",
                  body = accent_palette_payload(the$main_palette$main,the$main_palette$secondary),
@@ -76,7 +86,34 @@ huemint_randomize <- function(verbose=TRUE){
                  encode = "json")
   out <- httr::content(result)
   new_accents <- out$results[[1]]$palette[-c(1:2)]
-  rlang::exec(edit_the_accent_palette,!!!new_accents)
+  names(new_accents) <- paste0("accent_",1:length(new_accents))
 
-  if (verbose) show_colors(c(the$main_palette,the$accent_palette))
+  if (verbose) show_colors(c(main_palette_edits,new_accents))
+
+  if (auto_accept){
+    message("Palette ovweritten.")
+  } else {
+
+    prompt_text <-
+      paste("Accept the preview theme?",
+            "This will overwrite your existing theme (which may not be saved).",
+            "\nPlease Enter a Number.",
+            sep = " ")
+
+    response <- utils::menu(choices = c("Yes","No"),title = prompt_text)
+
+    if (response==0){
+      message("Choice aborted, keeping existing palette.")
+    } else if(response==1){
+      message("Palette ovweritten.")
+      rlang::exec(edit_the_main_palette,!!!main_palette_edits)
+      rlang::exec(edit_the_accent_palette,!!!new_accents)
+    } else {
+      message("Keeping existing palette.")
+    }
+
+  }
+
+
+
 }
