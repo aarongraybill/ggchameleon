@@ -1,5 +1,10 @@
 huemint_randomize <- function(verbose=TRUE){
 
+  if (!curl::has_internet()) {
+    warning("No internet connection, keeping existing colors palettes")
+    return(NULL)
+  }
+
   custom_specs <-
     matrix(data = 0,nrow = 7,ncol=7)
   custom_specs[1,2] <- 50 # Main and secondary should be diffable

@@ -3,6 +3,11 @@ theme_custom <-
             base_family = "",
             base_line_size = base_size / 22,
             base_rect_size = base_size / 22) {
+
+    working_fonts <-
+      ifelse(the$fonts%in%sysfonts::font_families(),the$fonts,"") |>
+      as.list()
+    names(working_fonts) <- names(the$fonts)
     t <-
       ggplot2::theme_bw(base_size, base_family, base_line_size, base_rect_size) +
       ggplot2::theme(
@@ -23,10 +28,10 @@ theme_custom <-
         panel.grid.minor.x = ggplot2::element_blank(),
         strip.background = ggplot2::element_rect(fill=the$main_palette$off_white),
         # Begin dealing with text ----
-        text = ggplot2::element_text(family=the$fonts$sans,colour = the$main_palette$black),
-        plot.title = ggplot2::element_text(color=the$main_palette$main,face="bold",hjust=0,family=the$fonts$display),
+        text = ggplot2::element_text(family=working_fonts$sans,colour = the$main_palette$black),
+        plot.title = ggplot2::element_text(color=the$main_palette$main,face="bold",hjust=0,family=working_fonts$display),
         plot.subtitle = ggplot2::element_text(hjust=0,face="bold.italic"),
-        plot.caption = ggplot2::element_text(family=the$fonts$sans,face="italic",hjust=0,color=the$main_palette$black),
+        plot.caption = ggplot2::element_text(family=working_fonts$sans,face="italic",hjust=0,color=the$main_palette$black),
         axis.text = ggplot2::element_text(colour = the$main_palette$black),
         # Legend Positioning: ----
         legend.position = c(0,1),
