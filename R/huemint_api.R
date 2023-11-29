@@ -14,16 +14,16 @@
 #' @param auto_accept A boolean. Whether or not to accept the new colors without
 #'   user confirmation. Defaults to `FALSE`.
 #'
-#' @param verbose   A boolean. Whether or not to preview the new palette.
+#' @param show_colors   A boolean. Whether or not to preview the new palette.
 #'   Defaults to `TRUE`.
-huemint_randomize <- function(auto_accept = FALSE, verbose = TRUE){
+huemint_randomize <- function(auto_accept = FALSE, show_colors = TRUE){
 
   # You can't provide consent without seeing the palette
-  if (!auto_accept & !verbose){
+  if (!auto_accept & !show_colors){
     message("The option ‘auto_accept = FALSE’ requires that you preview",
             " the colors to make your selection.",
-            " As such, the option ‘verbose = TRUE’ will be enabled.")
-    verbose <- TRUE
+            " As such, the option ‘show_colors = TRUE’ will be enabled.")
+    show_colors <- TRUE
   }
 
   if (!curl::has_internet()) {
@@ -88,7 +88,7 @@ huemint_randomize <- function(auto_accept = FALSE, verbose = TRUE){
   new_accents <- out$results[[1]]$palette[-c(1:2)]
   names(new_accents) <- paste0("accent_",1:length(new_accents))
 
-  if (verbose) show_colors(c(main_palette_edits,new_accents))
+  if (show_colors) show_colors(c(main_palette_edits,new_accents))
 
   if (auto_accept){
     message("Palette ovweritten.")
