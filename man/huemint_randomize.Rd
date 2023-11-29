@@ -4,11 +4,14 @@
 \alias{huemint_randomize}
 \title{Randomize Colors to a (Usually) Pleasant Palette}
 \usage{
-huemint_randomize(verbose = TRUE)
+huemint_randomize(auto_accept = FALSE, show_colors = TRUE)
 }
 \arguments{
-\item{verbose}{A boolean. Whether or not to preview the new palette. Defaults
-to \code{TRUE}.}
+\item{auto_accept}{A boolean. Whether or not to accept the new colors without
+user confirmation. Defaults to \code{FALSE}.}
+
+\item{show_colors}{A boolean. Whether or not to preview the new palette.
+Defaults to \code{TRUE}.}
 }
 \description{
 \code{huemint_randomize} \emph{overwrites} the existing colors in \link{the} (the
