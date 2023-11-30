@@ -149,13 +149,11 @@ elements.}
 }
 \description{
 With \code{edit_the_theme}, anything that can be modified with \code{\link[ggplot2:theme]{ggplot2::theme()}}
-syntax can be set as a default under the ggchameleon framework. The syntax of
+can be set as a default under the ggchameleon framework. The syntax of
 \code{edit_the_theme} mirrors that of \code{\link[ggplot2:theme]{ggplot2::theme()}}. You can customize layout
 parameters by customizing options like \code{legend.position}, or you can
-customize options related to aesthetics, like the font or colors.
-Importantly, \code{edit_the_theme} is unable to customize the "geometries" (the
-shapes representing the data), this is purely the supplemental shapes of a
-ggplot.
+customize options related font size or colors. Importantly, \code{edit_the_theme}
+is unable to customize the "geometries" the shapes representing the data.
 }
 \examples{
 # Places the legend at the bottom by default.

@@ -11,15 +11,15 @@ load_configs(file = "chameleon.yml")
 \code{\link[=save_configs]{save_configs()}}. Defaults to \code{chameleon.yml}.}
 }
 \description{
-If you have saved a configurations file using \code{\link[=save_configs]{save_configs()}}, you may
-wish to load those configurations at a later date. \code{load_configs} parses
-these configuration files and automatically updates your current ggchameleon
+If you have saved a configurations file using \code{\link[=save_configs]{save_configs()}}, you may wish
+to load those configurations at a later date. \code{load_configs} parses these
+configuration files and automatically updates your current ggchameleon
 instance so that future charts will have these new configurations applied.
 When \code{library(ggchameleon)} is called for the first time, \code{load_configs}
-looks for a file called \code{chameleon.yml} and loads the configurations stored
-there (the default location of \code{\link[=save_configs]{save_configs()}}). If you have a
-different configuration file that you would like to load, then you can
-specify that with the \code{file} argument.
+looks for a file called \code{chameleon.yml} in your working directory and loads
+the configurations stored there (the default location of \code{\link[=save_configs]{save_configs()}}).
+If you have a different configuration file that you would like to load, then
+you can specify that with the \code{file} argument.
 }
 \details{
 When loading a configuration file, \code{load_configs} edits the contents of \link{the}

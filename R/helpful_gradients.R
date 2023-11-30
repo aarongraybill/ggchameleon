@@ -1,7 +1,3 @@
-#' @export
-#'
-#'
-
 color_gradient <- function(x,start = the$main_palette$main,end = the$main_palette$off_white){
   scales::gradient_n_pal(c(start,end))(x)
 }

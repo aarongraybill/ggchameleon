@@ -2,7 +2,7 @@
 % Please edit documentation in R/configs.R
 \name{edit_the_accent_palette}
 \alias{edit_the_accent_palette}
-\title{Modify supplemental colors in theme}
+\title{Modify supplemental colors}
 \usage{
 edit_the_accent_palette(..., mode = c("overwrite", "append"))
 }
@@ -15,12 +15,17 @@ colors and adds every color specified in \code{...}.}
 }
 \description{
 The accent palette contains an arbitrary number of additional colors for your
-theme that can be used when coloring discrete/categorical variables. The
-accent palette does not have meaningful names or an order. Because of this,
-by default, \code{edit_the_accent_palette} overwrites \emph{the entire} existing accent
-palette. You can append to the existing list by using \code{mode = 'append'}
-argument. Behind the scenes, ggchameleon figures out which colors are most
+configurations that can be used when coloring discrete/categorical variables.
+The accent palette does not have meaningful names or an order. Because of
+this, by default, \code{edit_the_accent_palette} overwrites \emph{the entire} existing
+accent palette. You can append to the existing list by using \code{mode = 'append'}. Behind the scenes, ggchameleon figures out which colors are most
 differentiable, and includes those in your chart.
+}
+\details{
+If you only include a few colors, or if your chart requires many different
+colors, ggchameleon will automatically other colors to your chart. It tries
+to make these additional colors as differentiable as possible from the colors
+being used.
 }
 \examples{
 # Add additional colors to the accent palette

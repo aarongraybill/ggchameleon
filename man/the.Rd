@@ -24,13 +24,13 @@ and is updated automatically when one of the following is run:
 \details{
 \code{the} is named as such because it's intended to be used in the way that the
 English word "the" is used. For example, if you would like the main color
-used in your ggchameleon theme, you can write \code{the$main_palette$main}. This
-idea comes from  the suggestion
+used in your ggchameleon configurations, you can write
+\code{the$main_palette$main}. This idea comes from  the suggestion
 \href{https://r-pkgs.org/data.html#sec-data-state}{here}
 
-\code{the} is useful if you need to reference the elements of your theme in other
-parts of your code. For example if you wanted to change the color of a base R
-chart, you could get the color selections from \code{the}
+\code{the} is useful if you need to reference the elements of your configurations
+in other parts of your code. For example if you wanted to change the color of
+a base R chart, you could get the color selections from \code{the}
 }
 \examples{
 # Using Default base R colors

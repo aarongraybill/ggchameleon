@@ -2,7 +2,7 @@
 % Please edit documentation in R/huemint_api.R
 \name{huemint_randomize}
 \alias{huemint_randomize}
-\title{Randomize Colors to a (Usually) Pleasant Palette}
+\title{Randomize colors to a (usually) pleasant palette}
 \usage{
 huemint_randomize(auto_accept = FALSE, show_colors = TRUE)
 }
@@ -18,7 +18,7 @@ Defaults to \code{TRUE}.}
 environment that stores your current configurations). \code{huemint_randomize}
 leverages \link{https://huemint.com/} to generate the new color palette. Huemint
 uses machine learning to create color palettes that are novel and appealing.
-You can read more about that process \href{https://huemint.com/about/}{here}.
+You can read more about that process at \link{https://huemint.com/about/}.
 
 \code{huemint_randomize} imposes further restrictions on the generated palette---
 requiring certain colors to be more and less differentiable. For example the

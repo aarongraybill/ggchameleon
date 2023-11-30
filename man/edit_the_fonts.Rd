@@ -16,10 +16,10 @@ edit_the_fonts(...)
 \item{mono}{A "monospace" font. Used whenever code needs to be displayed.}
 }
 \description{
-\code{edit_the_fonts} allows you specify any fonts available in the \href{https://fonts.google.com/}{Google Fonts}
-library as fonts for your ggchameleon theme. You can specify different fonts depending on which part of the
-chart you are interested in modifying. \code{edit_the_fonts} defers to \code{\link[sysfonts:font_add_google]{sysfonts::font_add_google()}} for finding and installing
-Google fonts.
+\code{edit_the_fonts} allows you specify any fonts available in the \href{https://fonts.google.com/}{Google Fonts} library as fonts for your ggchameleon
+configurations. You can specify different fonts depending on which part of
+the chart you are interested in modifying. \code{edit_the_fonts} defers to
+\code{\link[sysfonts:font_add_google]{sysfonts::font_add_google()}} for finding and installing Google fonts.
 }
 \examples{
 # Changes the title font to the "Lobster" font family
