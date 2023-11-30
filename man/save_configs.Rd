@@ -17,17 +17,20 @@ appended to the end of the name to disambiguate.}
 If you are happy with your current chart style, and you wish to use it again
 in the future, you can save the current state of the ggchameleon
 configurations to a file on your machine using \code{save_configs()}. By default,
-this creates a file called \code{chameleon.yml} which stores the fonts, colors,
-and \code{\link[ggplot2:theme]{ggplot2::theme()}} modifications you have made. After you end your R
-session, you can reload these stylings using the \code{\link[=load_configs]{load_configs()}} function.
+this creates a file called \code{chameleon.yml} in your working directory which
+stores the fonts, colors, and \code{\link[ggplot2:theme]{ggplot2::theme()}} modifications you have made.
+After you end your R session, you can reload these stylings using the
+\code{\link[=load_configs]{load_configs()}} function.
 }
 \details{
-By default, \code{save_configs()} creates a file named \code{chameleon.yml} in your current working directory.
-If you are using an R project (ie if you have a \code{.Rproj} file), then your working directory is
-likely wherever the \code{.Rproj} located. When ggchameleon is loaded, it automatically looks for
-this \code{chameleon.yml} file, and if it finds it, it will automatically apply those
-configurations. This is convenient because whenever you re-run any code with
-ggplot2, it will automatically start using whatever you have saved.
+By default, \code{save_configs()} creates a file named \code{chameleon.yml} in your
+current working directory. If you are using an R project (ie if you have a
+\code{.Rproj} file), then your working directory is likely wherever the \code{.Rproj}
+located. When ggchameleon is loaded, it automatically looks for this
+\code{chameleon.yml} file in your working directory, and if it finds it, it will
+automatically apply those configurations. This is convenient because whenever
+you start a new R session and re-run any code with ggplot2, it will
+automatically start using whatever you have saved.
 }
 \examples{
 

@@ -10,13 +10,13 @@
 #'
 #' `the` is named as such because it's intended to be used in the way that the
 #' English word "the" is used. For example, if you would like the main color
-#' used in your ggchameleon theme, you can write `the$main_palette$main`. This
-#' idea comes from  the suggestion
+#' used in your ggchameleon configurations, you can write
+#' `the$main_palette$main`. This idea comes from  the suggestion
 #' [here](https://r-pkgs.org/data.html#sec-data-state)
 #'
-#' `the` is useful if you need to reference the elements of your theme in other
-#' parts of your code. For example if you wanted to change the color of a base R
-#' chart, you could get the color selections from `the`
+#' `the` is useful if you need to reference the elements of your configurations
+#' in other parts of your code. For example if you wanted to change the color of
+#' a base R chart, you could get the color selections from `the`
 #'
 #' @examples
 #' # Using Default base R colors
@@ -33,7 +33,7 @@ the <- new.env(parent = emptyenv())
 
 the$main_palette <-
   list(
-    "main" = "#000D4D", # A main distinctive color for your brand
+    "main" = "#000D4D", # A main distinctive color for your configuration
     "secondary" = "#55CE58", # A secondary color that goes well with the main
     "white" = "#ffffff", # Make this white unless you wanna change all page backgrounds
     "off_white" = "#E7E7E7", # dark enough to be visible on white w/o standing out
@@ -115,15 +115,20 @@ edit_the_main_palette <- function(...) {
   refresh_theming()
 }
 
-#' Modify supplemental colors in theme
+#' Modify supplemental colors
 #'
 #' The accent palette contains an arbitrary number of additional colors for your
-#' theme that can be used when coloring discrete/categorical variables. The
-#' accent palette does not have meaningful names or an order. Because of this,
-#' by default, `edit_the_accent_palette` overwrites *the entire* existing accent
-#' palette. You can append to the existing list by using `mode = 'append'`
-#' argument. Behind the scenes, ggchameleon figures out which colors are most
+#' configurations that can be used when coloring discrete/categorical variables.
+#' The accent palette does not have meaningful names or an order. Because of
+#' this, by default, `edit_the_accent_palette` overwrites *the entire* existing
+#' accent palette. You can append to the existing list by using `mode =
+#' 'append'`. Behind the scenes, ggchameleon figures out which colors are most
 #' differentiable, and includes those in your chart.
+#'
+#' If you only include a few colors, or if your chart requires many different
+#' colors, ggchameleon will automatically other colors to your chart. It tries
+#' to make these additional colors as differentiable as possible from the colors
+#' being used.
 #'
 #' @param ... A vector or comma-separated list of colors
 #' @param mode `"overwrite"` (the default), removes all existing accent colors
@@ -163,10 +168,11 @@ refresh_theming()
 
 #' Use custom fonts from Google Fonts
 #'
-#' `edit_the_fonts` allows you specify any fonts available in the [Google Fonts](https://fonts.google.com/)
-#' library as fonts for your ggchameleon theme. You can specify different fonts depending on which part of the
-#' chart you are interested in modifying. `edit_the_fonts` defers to [sysfonts::font_add_google()] for finding and installing
-#' Google fonts.
+#' `edit_the_fonts` allows you specify any fonts available in the [Google
+#' Fonts](https://fonts.google.com/) library as fonts for your ggchameleon
+#' configurations. You can specify different fonts depending on which part of
+#' the chart you are interested in modifying. `edit_the_fonts` defers to
+#' [sysfonts::font_add_google()] for finding and installing Google fonts.
 #'
 #' @param sans The most legible font, used for the smaller elements, axis labels, legend, etc.
 #' @param display The most distinctive font. Used for the title.
@@ -198,13 +204,11 @@ edit_the_fonts <- function(...) {
 #' Specify a custom ggplot2 plot layout
 #'
 #' With `edit_the_theme`, anything that can be modified with [ggplot2::theme()]
-#' syntax can be set as a default under the ggchameleon framework. The syntax of
+#' can be set as a default under the ggchameleon framework. The syntax of
 #' `edit_the_theme` mirrors that of [ggplot2::theme()]. You can customize layout
 #' parameters by customizing options like `legend.position`, or you can
-#' customize options related to aesthetics, like the font or colors.
-#' Importantly, `edit_the_theme` is unable to customize the "geometries" (the
-#' shapes representing the data), this is purely the supplemental shapes of a
-#' ggplot.
+#' customize options related font size or colors. Importantly, `edit_the_theme`
+#' is unable to customize the "geometries" the shapes representing the data.
 #'
 #' @inheritDotParams ggplot2::theme
 #'

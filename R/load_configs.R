@@ -1,14 +1,14 @@
 #' Load stylistic configurations from a file
 #'
-#' If you have saved a configurations file using [save_configs()], you may
-#' wish to load those configurations at a later date. `load_configs` parses
-#' these configuration files and automatically updates your current ggchameleon
+#' If you have saved a configurations file using [save_configs()], you may wish
+#' to load those configurations at a later date. `load_configs` parses these
+#' configuration files and automatically updates your current ggchameleon
 #' instance so that future charts will have these new configurations applied.
 #' When `library(ggchameleon)` is called for the first time, `load_configs`
-#' looks for a file called `chameleon.yml` and loads the configurations stored
-#' there (the default location of [save_configs()]). If you have a
-#' different configuration file that you would like to load, then you can
-#' specify that with the `file` argument.
+#' looks for a file called `chameleon.yml` in your working directory and loads
+#' the configurations stored there (the default location of [save_configs()]).
+#' If you have a different configuration file that you would like to load, then
+#' you can specify that with the `file` argument.
 #'
 #' When loading a configuration file, `load_configs` edits the contents of [the]
 #' using functions like [edit_the_fonts()]. The `chameleon.yml` file is intended
