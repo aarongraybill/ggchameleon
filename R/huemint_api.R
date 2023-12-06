@@ -16,6 +16,8 @@
 #'
 #' @param show_colors A boolean. Whether or not to preview the new palette.
 #'   Defaults to `TRUE`.
+#'
+#' @export
 huemint_randomize <- function(auto_accept = FALSE, show_colors = TRUE){
 
   # You can't provide consent without seeing the palette
