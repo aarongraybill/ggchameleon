@@ -22,9 +22,9 @@ huemint_randomize <- function(auto_accept = FALSE, show_colors = TRUE){
 
   # You can't provide consent without seeing the palette
   if (!auto_accept & !show_colors){
-    message("The option ‘auto_accept = FALSE’ requires that you preview",
+    message("The option \u0145auto_accept = FALSE\u0146 requires that you preview",
             " the colors to make your selection.",
-            " As such, the option ‘show_colors = TRUE’ will be enabled.")
+            " As such, the option \u0145show_colors = TRUE\u0146 will be enabled.")
     show_colors <- TRUE
   }
 
