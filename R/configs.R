@@ -213,6 +213,7 @@ edit_the_fonts <- function(...) {
 #' @inheritDotParams ggplot2::theme
 #'
 #' @examples
+#' library(ggplot2)
 #' # Places the legend at the bottom by default.
 #' edit_the_theme(legend.position='bottom')
 #'
