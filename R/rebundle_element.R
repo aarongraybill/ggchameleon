@@ -4,9 +4,9 @@ rebundle_element <- function(named_list){
   if (length(named_list)==1){return(named_list)}
 
   # Element Arguments minus the alternate spelling of color
-  text_args <- setdiff(formalArgs(ggplot2::element_text),"color")
-  rect_args <- setdiff(formalArgs(ggplot2::element_rect),"color")
-  line_args <- setdiff(formalArgs(ggplot2::element_line),"color")
+  text_args <- setdiff(methods::formalArgs(ggplot2::element_text),"color")
+  rect_args <- setdiff(methods::formalArgs(ggplot2::element_rect),"color")
+  line_args <- setdiff(methods::formalArgs(ggplot2::element_line),"color")
 
   # Test which element arguments the input list matches
   if (setequal(names(named_list),text_args)){

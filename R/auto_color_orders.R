@@ -104,9 +104,9 @@ smart_interpolate <- function(inputs = c(the$main_palette$main,
   inputs[2] <- target_color_hex
   lab[2,] <- target_color_lab
 
-  fl = approxfun(c(0,.5,1),lab[,1])
-  fa = approxfun(c(0,.5,1),lab[,2])
-  fb = approxfun(c(0,.5,1),lab[,3])
+  fl = stats::approxfun(c(0,.5,1),lab[,1])
+  fa = stats::approxfun(c(0,.5,1),lab[,2])
+  fb = stats::approxfun(c(0,.5,1),lab[,3])
 
   function(x){
     m <- cbind(fl(x),fa(x),fb(x))
