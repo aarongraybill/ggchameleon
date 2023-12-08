@@ -5,3 +5,4 @@
 ^data-raw$
 ^README\.Rmd$
 ^LICENSE\.md$
+^bg_api_key$
