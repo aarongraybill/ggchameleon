@@ -1,18 +1,38 @@
-load_fonts <- function() {
+get_font <- function(font){
 
-  if (!curl::has_internet()) {
-    warning("No internet connection, resorting to default fonts")
-    return(NULL)
-  }
+  if (font%in%sysfonts::font_families()){
+    # Do nothing, font exists
 
-  get_font <- function(font){
+  } else if (!curl::has_internet()) {
+      warning(paste0("No internet connection,",font, "will be replaced with default font"))
+      return(NULL)
+
+  } else{
+    # We have internet but not the font, try to download it
     tryCatch(
       sysfonts::font_add_google(font, db_cache = T),
       error = function(x) {
-        sysfonts::font_add_google(font, db_cache = F) #if we can't find it cached
+        #if we can't find it cached
+        tryCatch(
+          sysfonts::font_add_google(font, db_cache = F),
+          error = function(y){
+            if (grep("font not found",y$message)){
+              stop(paste0("The font: \"",
+                          font,
+                          "\" could not be found on Google Fonts. ",
+                          "Please ensure that the font is available and is ",
+                          "spelled correctly"))
+
+            }
+
+          }
+        )
       }
     )
   }
+}
+
+load_fonts <- function() {
   for (font in the$fonts) {
     get_font(font)
   }
