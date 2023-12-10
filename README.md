@@ -8,11 +8,11 @@
 
 ggchameleon allows you to write standard
 [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
-syntax while automatically theming your plots with user-specified or
-algorithmically determined colors and fonts. ggchameleon balances
-unobtrusiveness with reproducibility, allowing the user to save a
-`chameleon.yml` file which stores customized ggplot theming without
-requiring the user to write extra code to fetch this theming.
+syntax while automatically theming your plots with user-specified
+configurations. ggchameleon balances unobtrusiveness with
+reproducibility, allowing the user to save a `chameleon.yml` file which
+stores customized ggplot theming without requiring the user to write
+extra code to fetch this theming.
 
 ## Installation
 
@@ -33,19 +33,19 @@ ggchameleon gets its name from two key design principles:
     environment.
 
 On the color changing side, ggcchameleon allows the user to flexibly
-change theme elements (color, font, size of lines, etc.). ggchameleon is
-written to make these changes reproducible and easy to access with the
-`save_current_theme` function.
+change their charts’ theme elements (color, font, size of lines, etc.).
+ggchameleon is written to make these changes reproducible and easy to
+access with the `save_configs` function.
 
-However, much a like a real chameleon in dense rain forest foliage,
-ggchameleon is very hard to spot in your code! ggchameleon both reduces
-boilerplate and maintains compatability with standard `ggplot2`. In
-fact, when used as intended, the only place ggchameleon appears in your
-scripts is `library(ggchameleon)`. All of the theming is loaded on
-startup from your configurations or the package defaults. If you were to
-remove the `library(ggchameleon)` at the beginning of your code, you
-would produce plots with exactly the same information, now in the
-default ggplot theme.
+However, much a like a real chameleon in dense foliage, ggchameleon is
+very hard to spot in your code! ggchameleon both reduces boilerplate and
+maintains compatability with standard `ggplot2`. In fact, when used as
+intended, the only place ggchameleon appears in your scripts is
+`library(ggchameleon)`. All of the theming is loaded on startup from
+your configurations or the package defaults. If you were to remove the
+`library(ggchameleon)` at the beginning of your code, you would produce
+plots with exactly the same information, now in the default ggplot
+theme.
 
 ## Basic Usage
 
@@ -70,22 +70,23 @@ in how the plot looks:
 
 ``` r
 library(ggchameleon)
-#> Installing Fonts
-#> Installing Fonts
 p
 ```
 
-<img src="man/figures/README-add ggchameleon-1.png" width="100%" />
+<img src="man/figures/README-add_ggchameleon-1.png" width="100%" />
 
-But the real magic of ggchameleon comes when we wish to alter the
-default ggchameleon parameters:
+However, ggchameleon is intended to allow the user to configure their
+own style. In the plot above, the color goes from dark blue, to orange,
+to yellow. If you change the `"intermediate"` color, then you can make
+your color gradient go from the same dark blue to yellow, but now
+through green instead of orange.
 
 ``` r
-ggchameleon:::edit_the_main_palette(intermediate = "darkgreen")
+edit_the_main_palette(intermediate = "darkgreen")
 p
 ```
 
-<img src="man/figures/README-altering ggchameleon-1.png" width="100%" />
+<img src="man/figures/README-altering_ggchameleon-1.png" width="100%" />
 
 Notice that without having to specify a different
 `scale_color_continuous`, we were able to drastically change the colors
@@ -94,8 +95,7 @@ finds the parts of your theme that use the `intermediate` color and
 updates all such instances to use the new color.
 
 ``` r
-ggchameleon:::edit_the_fonts(sans="Creepster")
-#> Installing Fonts
+edit_the_fonts(sans="Creepster")
 p
 ```
 
@@ -105,39 +105,41 @@ We can also edit elements of the theme that we apply to each plot by
 default, for example:
 
 ``` r
-ggchameleon:::edit_the_theme(legend.position = "bottom",
+edit_the_theme(legend.position = "bottom",
                              legend.direction = "horizontal")
 
 p
 ```
 
-<img src="man/figures/README-editing theme-1.png" width="100%" />
+<img src="man/figures/README-editing_theme-1.png" width="100%" />
 
-As you can see, it does not take very much work to make a very
-customized, but very ugly theme! If we wish to burn our current theme to
-the ground and start anew, ggchameleon provides two useful functions:
+If you’re lacking color inspiration, ggchameleon provides a function to
+automatically generate a new color palette.
 
 ``` r
-ggchameleon:::huemint_randomize()
+huemint_randomize(auto_accept = TRUE)
+#> Palette ovweritten.
 ```
 
-<img src="man/figures/README-huemint and font shuffle-1.png" width="100%" />
+<img src="man/figures/README-huemint_and_font_shuffle-1.png" width="100%" />
+
+When run with `auto_accept = FALSE` (the default), the function will
+preview the new colors as above, and then give you the option to reject
+or accept the proposed theme. ggchameleon uses an API from
+[huemint.com](huemint.com) to generate the color scheme. The colors on
+Huemint are generated by a Machine Learning model that is trained on the
+design decisions of web developers, so the palettes generated are often
+more visually appealing than randomly drawing colors from a hat.
+
+But once we’ve accepted the theme, we can see that it has overhauled the
+colors:
 
 ``` r
-ggchameleon:::font_shuffle()
-#> Installing Fonts
-
+# Show the new colors from Huemint
 p
 ```
 
-<img src="man/figures/README-huemint and font shuffle-2.png" width="100%" />
-
-Your mileage may vary, especially with the font randomization, but
-ggchameleon does its best to make sure that these new random themes
-balance novelty with usability. Infinite shoutouts go to the teams at
-[Google Fonts](https://fonts.google.com/) for their fonts and
-[Huemint](https://huemint.com/) for their AI-generated color palettes
-respectively.
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ## Wrapping Up For Next Time
 
@@ -148,5 +150,12 @@ automatically applied the next time we load this project and use
 `library(ggchameleon)`.
 
 ``` r
-ggchameleon:::save_current_theme()
+save_configs()
 ```
+
+By default, `save_configs()` stores `chameleon.yml` in your current
+working directory. If you’re using an R project (ie if you have a .Rproj
+file), and then `chameleon.yml` will likely be saved at the same level
+as your `.Rproj`. This is useful because then all of the other scripts
+under this R project will automatically have your saved configurations
+applied.
