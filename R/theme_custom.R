@@ -21,7 +21,7 @@ theme_custom <-
           color = the$main_palette$off_white),
         panel.grid.minor.y = ggplot2::element_line(
           linetype = "dashed",
-          size = base_line_size / 2,
+          linewidth = base_line_size / 2,
           color = the$main_palette$off_white
         ),
         panel.grid.major.x = ggplot2::element_blank(),
