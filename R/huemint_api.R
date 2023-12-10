@@ -94,6 +94,8 @@ huemint_randomize <- function(auto_accept = FALSE, show_colors = TRUE){
 
   if (auto_accept){
     message("Palette ovweritten.")
+    rlang::exec(edit_the_main_palette,!!!main_palette_edits)
+    rlang::exec(edit_the_accent_palette,!!!new_accents)
   } else {
 
     prompt_text <-
