@@ -19,6 +19,18 @@ test_that("the fonts have expected names", {
   )
 })
 
+test_that("Nonexistent fonts give an error",{
+  expect_error(edit_the_fonts(sans="MrTambourineMan"),
+               "The font: \"MrTambourineMan\" could not be found")
+})
+
+test_that("Nonexistent fonts don't change any fonts",{
+  old_fonts <- the$fonts
+  tryCatch(edit_the_fonts(display='Lobster',sans="MrTambourineMan"),
+           error = function(x){NULL})
+  expect_equal(the$fonts,old_fonts)
+})
+
 
 test_that("Main colors Can be edited by color name",{
   test_color <- "magenta"
