@@ -99,6 +99,12 @@ edit_the_main_palette <- function(...) {
       ") are not in the main palette and will be ignored."
     ))
   }
+
+  if (!all(validate_colors(args[found]))){
+    bad_colors <- paste(args[!validate_colors(args)],collapse = "\", \"")
+    stop(paste0("The color(s): \"", bad_colors, "\" is/are not valid"))
+  }
+
   for (found_name in found) {
     the$main_palette[[found_name]] <- args[[found_name]]
   }
@@ -138,6 +144,10 @@ edit_the_accent_palette <-
     mode <- match.arg(mode)
     args <- list(...)
     args <- unlist(args)
+    if (!all(validate_colors(args))){
+      bad_colors <- paste(args[!validate_colors(args)],collapse = "\", \"")
+      stop(paste0("The color(s): \"", bad_colors, "\" is/are not valid"))
+    }
     if (length(args) < 4 && mode == "overwrite" && length(args)>0){
       warning("Fewer than four accent colors while overwriting is not recommended! Proceeding.")
       }

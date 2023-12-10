@@ -62,6 +62,24 @@ test_that("Main colors Can be edited by hex",{
   edit_the_main_palette(main = colors_in$main)
 })
 
+test_that("invalid main colors are errored",{
+  expect_error(
+    edit_the_main_palette(main="not a real color"),
+    "not a real color"
+  )
+})
+
+test_that("invalid main colors do not take effect",{
+
+  old_main <- the$main_palette
+  tryCatch(
+    edit_the_main_palette(main="red",secondary="not a real color"),
+    error = function(e){NULL}
+  )
+
+  expect_equal(old_main,the$main_palette)
+})
+
 test_that("Accent colors can be replaced",{
   test_colors <- c("black","white","red","blue")
 
@@ -102,6 +120,24 @@ test_that("Warning given with few accent colors",{
 
   # Reset to original configs
   edit_the_accent_palette(colors_in)
+})
+
+test_that("invalid accent colors are errored",{
+  expect_error(
+    edit_the_accent_palette("not a real color"),
+    "not a real color"
+  )
+})
+
+test_that("invalid accent colors do not take effect",{
+
+  old_accent <- the$accent_palette
+  tryCatch(
+    edit_the_accent_palette("red","not a real color"),
+    error = function(e){NULL}
+  )
+
+  expect_equal(old_accent,the$accent_palette)
 })
 
 
