@@ -182,9 +182,18 @@ edit_the_fonts <- function(...) {
       ") are not in the fonts and will be ignored."
     ))
   }
+
+  # First download all of the fonts
   for (found_name in found) {
+    get_font(args[[found_name]])
+  }
+
+  # If that works without error, then we can overwrite the fonts
+  # with the new fonts
+  for (found_name in found){
     the$fonts[[found_name]] <- args[[found_name]]
   }
+
   refresh_theming()
 }
 
