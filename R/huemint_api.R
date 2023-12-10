@@ -1,11 +1,11 @@
 #' Randomize colors to a (usually) pleasant palette
 #'
-#' @description
-#' `huemint_randomize` *overwrites* the existing colors in [the] (the
-#' environment that stores your current configurations). `huemint_randomize`
-#' leverages [https://huemint.com/] to generate the new color palette. Huemint
-#' uses machine learning to create color palettes that are novel and appealing.
-#' You can read more about that process at [https://huemint.com/about/].
+#' @description `huemint_randomize` *overwrites* the existing colors in [the]
+#' (the environment that stores your current configurations).
+#' `huemint_randomize` leverages [https://huemint.com/](https://huemint.com/) to
+#' generate the new color palette. Huemint uses machine learning to create color
+#' palettes that are novel and appealing. You can read more about that process
+#' at [https://huemint.com/about/](https://huemint.com/about/).
 #'
 #' `huemint_randomize` imposes further restrictions on the generated palette---
 #' requiring certain colors to be more and less differentiable. For example the
@@ -22,9 +22,9 @@ huemint_randomize <- function(auto_accept = FALSE, show_colors = TRUE){
 
   # You can't provide consent without seeing the palette
   if (!auto_accept & !show_colors){
-    message("The option ‘auto_accept = FALSE’ requires that you preview",
+    message("The option \u0145auto_accept = FALSE\u0146 requires that you preview",
             " the colors to make your selection.",
-            " As such, the option ‘show_colors = TRUE’ will be enabled.")
+            " As such, the option \u0145show_colors = TRUE\u0146 will be enabled.")
     show_colors <- TRUE
   }
 

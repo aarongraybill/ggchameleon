@@ -74,17 +74,7 @@ the$theme <- ggplot2::theme()
 #' more parameters at a time. After editing parameters, the updated values are
 #' stored in [the].
 #'
-#' @param main The primary color used for title text and appearing whenever
-#'   possible in charts
-#' @param secondary A color that should notably contrast the `main` color
-#' @param white The whitest color that will appear in your charts
-#' @param off_white The color used for grid lines, subtly differentiable from
-#'   `white`
-#' @param black The darkest color that will appear in your plots
-#' @param contrast A color that is **very** differentiable from `main`. Used
-#'   whenever there is a continuous color gradient
-#' @param intermediate A color to appear between `main` and `contrast` in
-#'   continuous gradients
+#' @param ... Any color that is available in `the$main_palette`
 #'
 #' @examples
 #' # Editing one parameter at a time
@@ -174,10 +164,7 @@ refresh_theming()
 #' the chart you are interested in modifying. `edit_the_fonts` defers to
 #' [sysfonts::font_add_google()] for finding and installing Google fonts.
 #'
-#' @param sans The most legible font, used for the smaller elements, axis labels, legend, etc.
-#' @param display The most distinctive font. Used for the title.
-#' @param serif Used in the subtitle.
-#' @param mono A "monospace" font. Used whenever code needs to be displayed.
+#' @param ... Any fonts available in `the$fonts`
 #'
 #' @examples
 #' # Changes the title font to the "Lobster" font family
@@ -213,6 +200,7 @@ edit_the_fonts <- function(...) {
 #' @inheritDotParams ggplot2::theme
 #'
 #' @examples
+#' library(ggplot2)
 #' # Places the legend at the bottom by default.
 #' edit_the_theme(legend.position='bottom')
 #'

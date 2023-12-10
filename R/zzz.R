@@ -10,5 +10,5 @@
 }
 
 .onUnload <- function(libname,pkgname) {
-  theme_set <- theme_set(the$old_theme)
+  ggplot2::theme_set(the$old_theme)
 }

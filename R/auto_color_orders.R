@@ -1,5 +1,5 @@
-#' Generate Maximally Differentiable Set of Palette Colors:
-#'
+# Generate Maximally Differentiable Set of Palette Colors:
+#
 gen_palette <- function(n) {
   palette <- c(the$main_palette[c("main", "secondary","intermediate")], the$accent_palette)
   extra_colors <- c()
@@ -57,7 +57,7 @@ gen_palette <- function(n) {
   return(palette[colors] |> unlist() |> unname())
 }
 
-#' Luminance Linear Color Gradient
+# Luminance Linear Color Gradient
 custom_viridis_palette <-
   function(){
     inputs <-  c(the$main_palette$main,
@@ -104,9 +104,9 @@ smart_interpolate <- function(inputs = c(the$main_palette$main,
   inputs[2] <- target_color_hex
   lab[2,] <- target_color_lab
 
-  fl = approxfun(c(0,.5,1),lab[,1])
-  fa = approxfun(c(0,.5,1),lab[,2])
-  fb = approxfun(c(0,.5,1),lab[,3])
+  fl = stats::approxfun(c(0,.5,1),lab[,1])
+  fa = stats::approxfun(c(0,.5,1),lab[,2])
+  fb = stats::approxfun(c(0,.5,1),lab[,3])
 
   function(x){
     m <- cbind(fl(x),fa(x),fb(x))
@@ -115,7 +115,7 @@ smart_interpolate <- function(inputs = c(the$main_palette$main,
 
 }
 
-#' Discretized Luminance Linear Color Gradient
+# Discretized Luminance Linear Color Gradient
 custom_discrete_viridis_palette <- function(n){
   c <- smart_interpolate()(1:n/n)
   c[1] <- smart_interpolate()(0)

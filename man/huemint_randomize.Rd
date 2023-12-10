@@ -14,11 +14,12 @@ user confirmation. Defaults to \code{FALSE}.}
 Defaults to \code{TRUE}.}
 }
 \description{
-\code{huemint_randomize} \emph{overwrites} the existing colors in \link{the} (the
-environment that stores your current configurations). \code{huemint_randomize}
-leverages \link{https://huemint.com/} to generate the new color palette. Huemint
-uses machine learning to create color palettes that are novel and appealing.
-You can read more about that process at \link{https://huemint.com/about/}.
+\code{huemint_randomize} \emph{overwrites} the existing colors in \link{the}
+(the environment that stores your current configurations).
+\code{huemint_randomize} leverages \url{https://huemint.com/} to
+generate the new color palette. Huemint uses machine learning to create color
+palettes that are novel and appealing. You can read more about that process
+at \url{https://huemint.com/about/}.
 
 \code{huemint_randomize} imposes further restrictions on the generated palette---
 requiring certain colors to be more and less differentiable. For example the

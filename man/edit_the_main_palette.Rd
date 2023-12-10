@@ -7,23 +7,7 @@
 edit_the_main_palette(...)
 }
 \arguments{
-\item{main}{The primary color used for title text and appearing whenever
-possible in charts}
-
-\item{secondary}{A color that should notably contrast the \code{main} color}
-
-\item{white}{The whitest color that will appear in your charts}
-
-\item{off_white}{The color used for grid lines, subtly differentiable from
-\code{white}}
-
-\item{black}{The darkest color that will appear in your plots}
-
-\item{contrast}{A color that is \strong{very} differentiable from \code{main}. Used
-whenever there is a continuous color gradient}
-
-\item{intermediate}{A color to appear between \code{main} and \code{contrast} in
-continuous gradients}
+\item{...}{Any color that is available in \code{the$main_palette}}
 }
 \description{
 \code{edit_the_main_palette()} allows you to change the colors that automatically

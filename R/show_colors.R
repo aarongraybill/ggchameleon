@@ -49,25 +49,25 @@ show_colors <-
     if (is.list(colours)){colours <- unlist(colours)}
     colours <- c(colours, rep(NA, nas))
     colours <- matrix(colours, ncol = ncol, byrow = TRUE)
-    old <- par(pty = "s", mar = c(0, 0, 0, 0))
-    on.exit(par(old))
+    old <- graphics::par(pty = "s", mar = c(0, 0, 0, 0))
+    on.exit(graphics::par(old))
     size <- max(dim(colours))
     plot(c(0, size), c(0, -size), type = "n", xlab = "", ylab = "",
          axes = FALSE)
-    rect(col(colours) - 1, -row(colours) + 1, col(colours),
+    graphics::rect(col(colours) - 1, -row(colours) + 1, col(colours),
          -row(colours), col = colours, border = borders)
     if (labels) {
       if (is.null(color_names)){
       print("I don't think you have names")
       hcl <- farver::decode_colour(colours, "rgb", "hcl")
       label_col <- ifelse(hcl[, "l"] > 50, "black", "white")
-      text(col(colours) - 0.5, -row(colours) + 0.5, colours,
+      graphics::text(col(colours) - 0.5, -row(colours) + 0.5, colours,
            cex = cex_label, col = label_col)
       }
       else {
         hcl <- farver::decode_colour(colours, "rgb", "hcl")
         label_col <- ifelse(hcl[, "l"] > 50, "black", "white")
-        text(col(colours) - 0.5, -row(colours) + 0.5, labels={matrix(color_names,nrow=nrow,byrow = T)},
+        graphics::text(col(colours) - 0.5, -row(colours) + 0.5, labels={matrix(color_names,nrow=nrow,byrow = T)},
              cex = cex_label, col = label_col)
         }
       }

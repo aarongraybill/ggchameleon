@@ -156,6 +156,7 @@ customize options related font size or colors. Importantly, \code{edit_the_theme
 is unable to customize the "geometries" the shapes representing the data.
 }
 \examples{
+library(ggplot2)
 # Places the legend at the bottom by default.
 edit_the_theme(legend.position='bottom')
 

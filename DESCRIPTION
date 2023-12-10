@@ -10,21 +10,21 @@ Description: Automatically and consistently apply custom colors, fonts,
     elements.
 URL: https://github.com/aarongraybill/ggchameleon
 BugReports: https://github.com/aarongraybill/ggchameleon/issues
-License: `use_mit_license()`
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-    colorspace,
     curl,
+    farver,
     ggplot2,
-    jsonlite,
-    knitr,
-    rmarkdown,
+    httr,
+    methods,
+    rlang,
+    scales,
     spacesXYZ,
     sysfonts (>= 0.8.8),
     showtext,
-    tableHTML,
     yaml
 Depends: 
     R (>= 2.10)

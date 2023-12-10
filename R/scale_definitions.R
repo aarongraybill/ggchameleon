@@ -2,26 +2,26 @@
 scale_color_custom_d <-
   function (..., alpha = 1, begin = 0, end = 1, direction = 1,
             option = "D", aesthetics = "colour"){
-    discrete_scale(aesthetics="colour", "custom_d", gen_palette, ..., na.value = the$main_palette$off_white)
+    ggplot2::discrete_scale(aesthetics="colour", "custom_d", gen_palette, ..., na.value = the$main_palette$off_white)
   }
 
 scale_fill_custom_d <-
   function (..., alpha = 1, begin = 0, end = 1, direction = 1,
             option = "D", aesthetics = "fill"){
-    discrete_scale(aesthetics, "custom_d", gen_palette, ..., na.value = the$main_palette$off_white)
+    ggplot2::discrete_scale(aesthetics, "custom_d", gen_palette, ..., na.value = the$main_palette$off_white)
   }
 
 # Discrete Ordered ----
 scale_color_custom_o <-
   function (..., alpha = 1, begin = 0, end = 1, direction = 1,
             option = "D", aesthetics = "colour"){
-    discrete_scale(aesthetics="colour", "custom_o", custom_discrete_viridis_palette, ..., na.value = the$main_palette$off_white)
+    ggplot2::discrete_scale(aesthetics="colour", "custom_o", custom_discrete_viridis_palette, ..., na.value = the$main_palette$off_white)
   }
 
 scale_fill_custom_o <-
   function (..., alpha = 1, begin = 0, end = 1, direction = 1,
             option = "D", aesthetics = "fill"){
-    discrete_scale(aesthetics, "custom_o", custom_discrete_viridis_palette, ..., na.value = the$main_palette$off_white)
+    ggplot2::discrete_scale(aesthetics, "custom_o", custom_discrete_viridis_palette, ..., na.value = the$main_palette$off_white)
   }
 
 # Continuous ----
@@ -37,7 +37,7 @@ scale_color_custom_c <-
             na.value = "grey50",
             guide = "colourbar",
             aesthetics = "colour") {
-    continuous_scale(
+    ggplot2::continuous_scale(
       aesthetics,
       "custom_c",
       smart_interpolate(),
@@ -59,7 +59,7 @@ scale_fill_custom_c <-
             na.value = the$main_palette$off_white,
             guide = "colourbar",
             aesthetics = "fill") {
-    continuous_scale(
+    ggplot2::continuous_scale(
       aesthetics = "fill",
       "custom_c",
       smart_interpolate(),
@@ -83,7 +83,7 @@ scale_color_custom_b <-
             na.value = the$main_palette$off_white,
             guide = "colourbar",
             aesthetics = "colour") {
-    continuous_scale(
+    ggplot2::continuous_scale(
       aesthetics = "colour",
       "custom_b",
       smart_interpolate(),
@@ -105,7 +105,7 @@ scale_fill_custom_b <-
             na.value = the$main_palette$off_white,
             guide = "colourbar",
             aesthetics = "fill") {
-    continuous_scale(
+    ggplot2::continuous_scale(
       aesthetics = "fill",
       "custom_b",
       smart_interpolate(),
