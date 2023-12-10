@@ -70,22 +70,20 @@ in how the plot looks:
 
 ``` r
 library(ggchameleon)
-#> Installing Fonts
-#> Installing Fonts
 p
 ```
 
-<img src="man/figures/README-add ggchameleon-1.png" width="100%" />
+<img src="man/figures/README-add_ggchameleon-1.png" width="100%" />
 
 But the real magic of ggchameleon comes when we wish to alter the
 default ggchameleon parameters:
 
 ``` r
-ggchameleon:::edit_the_main_palette(intermediate = "darkgreen")
+edit_the_main_palette(intermediate = "darkgreen")
 p
 ```
 
-<img src="man/figures/README-altering ggchameleon-1.png" width="100%" />
+<img src="man/figures/README-altering_ggchameleon-1.png" width="100%" />
 
 Notice that without having to specify a different
 `scale_color_continuous`, we were able to drastically change the colors
@@ -94,8 +92,7 @@ finds the parts of your theme that use the `intermediate` color and
 updates all such instances to use the new color.
 
 ``` r
-ggchameleon:::edit_the_fonts(sans="Creepster")
-#> Installing Fonts
+edit_the_fonts(sans="Creepster")
 p
 ```
 
@@ -105,39 +102,31 @@ We can also edit elements of the theme that we apply to each plot by
 default, for example:
 
 ``` r
-ggchameleon:::edit_the_theme(legend.position = "bottom",
+edit_the_theme(legend.position = "bottom",
                              legend.direction = "horizontal")
 
 p
 ```
 
-<img src="man/figures/README-editing theme-1.png" width="100%" />
+<img src="man/figures/README-editing_theme-1.png" width="100%" />
 
 As you can see, it does not take very much work to make a very
 customized, but very ugly theme! If we wish to burn our current theme to
 the ground and start anew, ggchameleon provides two useful functions:
 
 ``` r
-ggchameleon:::huemint_randomize()
+huemint_randomize(auto_accept = TRUE)
+#> Palette ovweritten.
 ```
 
-<img src="man/figures/README-huemint and font shuffle-1.png" width="100%" />
+<img src="man/figures/README-huemint_and_font_shuffle-1.png" width="100%" />
 
 ``` r
-ggchameleon:::font_shuffle()
-#> Installing Fonts
 
 p
 ```
 
-<img src="man/figures/README-huemint and font shuffle-2.png" width="100%" />
-
-Your mileage may vary, especially with the font randomization, but
-ggchameleon does its best to make sure that these new random themes
-balance novelty with usability. Infinite shoutouts go to the teams at
-[Google Fonts](https://fonts.google.com/) for their fonts and
-[Huemint](https://huemint.com/) for their AI-generated color palettes
-respectively.
+<img src="man/figures/README-huemint_and_font_shuffle-2.png" width="100%" />
 
 ## Wrapping Up For Next Time
 
@@ -148,5 +137,5 @@ automatically applied the next time we load this project and use
 `library(ggchameleon)`.
 
 ``` r
-ggchameleon:::save_current_theme()
+save_configs()
 ```
