@@ -61,29 +61,29 @@ p
 
 Now, if we load the ggchameleon package we can immediately see a change in how the plot looks:
 
-```{r add ggchameleon}
+```{r add_ggchameleon}
 library(ggchameleon)
 p
 ```
 
 But the real magic of ggchameleon comes when we wish to alter the default ggchameleon parameters:
 
-```{r altering ggchameleon}
-ggchameleon:::edit_the_main_palette(intermediate = "darkgreen")
+```{r altering_ggchameleon}
+edit_the_main_palette(intermediate = "darkgreen")
 p
 ```
 
 Notice that without having to specify a different `scale_color_continuous`, we were able to drastically change the colors of the legend. This is where ggchameleon does the heavy lifting. It finds the parts of your theme that use the `intermediate` color and updates all such instances to use the new color.
 
 ```{r editing fonts}
-ggchameleon:::edit_the_fonts(sans="Creepster")
+edit_the_fonts(sans="Creepster")
 p
 ```
 
 We can also edit elements of the theme that we apply to each plot by default, for example:
 
-```{r editing theme}
-ggchameleon:::edit_the_theme(legend.position = "bottom",
+```{r editing_theme}
+edit_the_theme(legend.position = "bottom",
                              legend.direction = "horizontal")
 
 p
@@ -91,19 +91,16 @@ p
 
 As you can see, it does not take very much work to make a very customized, but very ugly theme! If we wish to burn our current theme to the ground and start anew, ggchameleon provides two useful functions:
 
-```{r huemint and font shuffle}
-ggchameleon:::huemint_randomize()
-ggchameleon:::font_shuffle()
+```{r huemint_and_font_shuffle}
+huemint_randomize(auto_accept = TRUE)
 
 p
 ```
-
-Your mileage may vary, especially with the font randomization, but ggchameleon does its best to make sure that these new random themes balance novelty with usability. Infinite shoutouts go to the teams at [Google Fonts](https://fonts.google.com/) for their fonts and [Huemint](https://huemint.com/) for their AI-generated color palettes respectively.
 
 ## Wrapping Up For Next Time
 
 Now that we've edited the theming to our heart's content, we can save these modifications for next time we use this project. If we run the following, we will save a file, `chameleon.yml` which will be automatically applied the next time we load this project and use `library(ggchameleon)`.
 
-```{r save theme,eval=FALSE}
-ggchameleon:::save_current_theme()
+```{r save_theme,eval=FALSE}
+save_configs()
 ```
