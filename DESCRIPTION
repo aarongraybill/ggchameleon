@@ -22,7 +22,6 @@ Imports:
     methods,
     rlang,
     scales,
-    spacesXYZ,
     sysfonts (>= 0.8.8),
     showtext,
     yaml
