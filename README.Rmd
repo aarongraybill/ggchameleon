@@ -79,7 +79,7 @@ p
 
 Notice that without having to specify a different `scale_color_continuous`, we were able to drastically change the colors of the legend. This is where ggchameleon does the heavy lifting. It finds the parts of your theme that use the `intermediate` color and updates all such instances to use the new color.
 
-```{r editing fonts}
+```{r editing_fonts}
 edit_the_fonts(sans="Creepster")
 p
 ```

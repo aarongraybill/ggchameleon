@@ -99,7 +99,7 @@ edit_the_fonts(sans="Creepster")
 p
 ```
 
-<img src="man/figures/README-editing fonts-1.png" width="100%" />
+<img src="man/figures/README-editing_fonts-1.png" width="100%" />
 
 We can also edit elements of the theme that we apply to each plot by
 default, for example:
