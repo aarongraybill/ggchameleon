@@ -91,3 +91,23 @@ test_that("Warning given with few accent colors",{
   # Reset to original configs
   edit_the_accent_palette(colors_in)
 })
+
+
+test_that("the fonts can be swapped locally",{
+  in_font <- the$fonts$display
+
+  edit_the_fonts(display="Atkinson Hyperlegible")
+  expect_equal(the$fonts$display,"Atkinson Hyperlegible")
+
+  edit_the_fonts(display = in_font)
+
+})
+
+test_that("the fonts can be added from remote",{
+  in_font <- the$fonts$display
+
+  edit_the_fonts(display="Lobster")
+  expect_equal(the$fonts$display,"Lobster")
+
+  edit_the_fonts(display = in_font)
+})
