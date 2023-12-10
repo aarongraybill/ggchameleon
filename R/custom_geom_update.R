@@ -7,10 +7,10 @@ custom_geom_update <- function(){
     "line", list(color=the$main_palette$black,size=line_size)
   )
   ggplot2::update_geom_defaults(
-    "bar", list(color=the$main_palette$black,fill=alpha_gradient(.5),size=line_size)
+    "bar", list(color=the$main_palette$black,fill=scales::alpha(the$main_palette$main,.5),size=line_size)
   )
   ggplot2::update_geom_defaults(
-    "smooth",list(color = alpha_gradient(.5),fill=the$main_palette$off_white) # transparent
+    "smooth",list(color = scales::alpha(the$main_palette$main,.5),fill=the$main_palette$off_white) # transparent
   )
   ggplot2::update_geom_defaults(
     "abline",list(color = the$main_palette$black,size=line_size)
