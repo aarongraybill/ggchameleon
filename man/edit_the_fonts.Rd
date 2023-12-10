@@ -7,13 +7,7 @@
 edit_the_fonts(...)
 }
 \arguments{
-\item{sans}{The most legible font, used for the smaller elements, axis labels, legend, etc.}
-
-\item{display}{The most distinctive font. Used for the title.}
-
-\item{serif}{Used in the subtitle.}
-
-\item{mono}{A "monospace" font. Used whenever code needs to be displayed.}
+\item{...}{Any fonts available in \code{the$fonts}}
 }
 \description{
 \code{edit_the_fonts} allows you specify any fonts available in the \href{https://fonts.google.com/}{Google Fonts} library as fonts for your ggchameleon
