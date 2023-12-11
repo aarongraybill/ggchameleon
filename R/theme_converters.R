@@ -7,7 +7,7 @@ theme_to_list <- function(theme){
     function(t){
       list(
         class = class(t),
-        attributes = as.list(t)
+        attributes = unclass(as.list(t))
       )
     }
   )
