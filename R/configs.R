@@ -247,4 +247,3 @@ edit_the_theme <- function(...){
 
   refresh_theming()
 }
-
