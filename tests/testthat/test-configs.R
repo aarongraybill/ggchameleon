@@ -163,3 +163,23 @@ test_that("the fonts can be added from remote",{
 test_that("bad theme arguments message",{
   expect_message(edit_the_theme(not_an_argument="doesn't matter"),"are not valid")
 })
+
+test_that("theme arguments with strings can be edited",{
+  old_theme <- ggplot2::theme_get()
+
+  edit_the_theme(legend.position='bottom')
+
+  expect_equal(theme_get()$legend.position,'bottom')
+
+  edit_the_theme(legend.position = old_theme$legend.position)
+})
+
+test_that("theme arguments with elements can be edited",{
+  old_theme <- ggplot2::theme_get()
+
+  edit_the_theme(text = element_text(angle = 45))
+
+  expect_equal(theme_get()$text$angle,45)
+
+  edit_the_theme(text = old_theme$text)
+})
