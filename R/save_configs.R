@@ -39,6 +39,9 @@ save_configs <- function(file="chameleon.yml",overwrite=FALSE){
   # to using ggchameleon
   to_write <- as.list(the)[names(the)!='old_theme']
 
+  # Convert gg theme to yaml friendly list
+  to_write[['theme']] <- theme_to_list(to_write[['theme']])
+
   if (!yml_exists){
     yaml::write_yaml(to_write,file)
     message("Configurations saved to \"",file,"\".")
