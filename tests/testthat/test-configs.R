@@ -159,3 +159,7 @@ test_that("the fonts can be added from remote",{
 
   edit_the_fonts(display = in_font)
 })
+
+test_that("bad theme arguments message",{
+  expect_message(edit_the_theme(not_an_argument="doesn't matter"),"are not valid")
+})

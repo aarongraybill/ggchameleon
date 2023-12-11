@@ -231,10 +231,19 @@ edit_the_theme <- function(...){
   args <- list(...)
   bundled_args <- lapply(args,rebundle_element)
 
+  found = intersect(names(args), names(ggplot2::get_element_tree()))
+  missing = setdiff(names(args), names(ggplot2::get_element_tree()))
+  if (length(missing) > 0) {
+    message(paste0(
+      "Arguments: (",
+      paste0(missing, collapse = ", "),
+      ") are not valid arguments to ggplot2::theme and will be ignored"
+    ))
+  }
+
   the$theme <-
     the$theme +
     rlang::exec(ggplot2::theme,!!!bundled_args)
 
   refresh_theming()
 }
-
