@@ -23,6 +23,7 @@
 load_configs <- function(file="chameleon.yml") {
   if (file.exists(file)){
     configs <- yaml::read_yaml(file)
+    configs[['theme']] <- list_to_theme(configs[['theme']])
     rlang::exec("edit_the_main_palette",!!!configs$main_palette)
     rlang::exec("edit_the_accent_palette",!!!configs$accent_palette)
     rlang::exec("edit_the_fonts",!!!configs$fonts)
