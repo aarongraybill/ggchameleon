@@ -20,6 +20,7 @@ list_to_theme <- function(l){
   out_list <-
     lapply(l,function(x){
     out <- structure(x$attributes,class = x$class)
+    if (length(out)==1) {out <- out[[1]]}
     return(out)
   })
   return(out_list)
