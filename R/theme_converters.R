@@ -19,8 +19,7 @@ theme_to_list <- function(theme){
 list_to_theme <- function(l){
   out_list <-
     lapply(l,function(x){
-    out <- x$attributes
-    class(out) <- x$class
+    out <- structure(x$attributes,class = x$class)
     return(out)
   })
   return(out_list)
