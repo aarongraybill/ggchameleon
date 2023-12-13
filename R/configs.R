@@ -229,7 +229,6 @@ edit_the_fonts <- function(...) {
 #' @export
 edit_the_theme <- function(...){
   args <- list(...)
-  bundled_args <- lapply(args,rebundle_element)
 
   found = intersect(names(args), names(ggplot2::get_element_tree()))
   missing = setdiff(names(args), names(ggplot2::get_element_tree()))
@@ -243,7 +242,7 @@ edit_the_theme <- function(...){
 
   the$theme <-
     the$theme +
-    rlang::exec(ggplot2::theme,!!!bundled_args)
+    rlang::exec(ggplot2::theme,!!!args[found])
 
   refresh_theming()
 }
