@@ -17,3 +17,25 @@ download.file(color_change_url,'data-raw/color_change_raw.csv')
 
 predation_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon%20Behavior%20Proportions.csv'
 download.file(predation_url,'data-raw/predation_raw.csv')
+
+# 2. Create id Crosswalk ----
+library(dplyr)
+
+measurements_raw <- read.csv('data-raw/measurements_raw.csv')
+
+id_crosswalk <-
+  measurements_raw |>
+  # Done so ids go in the order: hatchling, juvenile, adult
+  mutate(sort_order = factor(
+    substr(indv, 1, 1),
+    levels = c("H", "J", "A"),
+    ordered = TRUE
+  )) |>
+  arrange(sort_order) |>
+  # Assign a unique id to each internal id
+  mutate(id = cur_group_id(),
+         .by = indv) |>
+  # Only keep unique internal id to new id pairs
+  distinct(indv, id)
+
+
