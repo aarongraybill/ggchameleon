@@ -10,7 +10,7 @@
 
 # 1. Save data ----
 measurements_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon_Measurements_v3.csv'
-download.file(measurement_url,'data-raw/measurements_raw.csv')
+download.file(measurements_url,'data-raw/measurements_raw.csv')
 
 color_change_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon%20Color%20JNDs.csv'
 download.file(color_change_url,'data-raw/color_change_raw.csv')
