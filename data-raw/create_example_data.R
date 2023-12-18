@@ -9,8 +9,8 @@
 # interpretable. Then we need to save the three data sets.
 
 # 1. Save data ----
-measurements_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon_Measurements_v3.csv'
-download.file(measurements_url,'data-raw/measurements_raw.csv')
+chameleons_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon_Measurements_v3.csv'
+download.file(chameleons_url,'data-raw/chameleons_raw.csv')
 
 color_change_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon%20Color%20JNDs.csv'
 download.file(color_change_url,'data-raw/color_change_raw.csv')
@@ -21,10 +21,10 @@ download.file(predation_url,'data-raw/predation_raw.csv')
 # 2. Create id Crosswalk ----
 library(dplyr)
 
-measurements_raw <- read.csv('data-raw/measurements_raw.csv')
+chameleons_raw <- read.csv('data-raw/chameleons_raw.csv')
 
 id_crosswalk <-
-  measurements_raw |>
+  chameleons_raw |>
   # Done so ids go in the order: hatchling, juvenile, adult
   mutate(sort_order = factor(
     substr(indv, 1, 1),
@@ -39,8 +39,8 @@ id_crosswalk <-
   distinct(indv, id)
 
 # 3. Clean Measurments Data
-measurements <-
-  measurements_raw |>
+chameleons <-
+  chameleons_raw |>
   rename(
     head_length = HL,
     head_height = HH,
@@ -66,8 +66,8 @@ measurements <-
     growth_stage = factor(growth_stage,c("hatchling","juvenile","adult"),ordered=T)
   )
 
-measurements <-
-  measurements |>
+chameleons <-
+  chameleons |>
   left_join(id_crosswalk, by = 'indv') |>
   select(id,growth_stage,everything(),-indv) |>
   arrange(id)
