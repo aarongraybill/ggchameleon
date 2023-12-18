@@ -122,3 +122,24 @@ predation <-
   arrange(id)
 
 usethis::use_data(predation)
+
+# 5. Clean Color Change Data ----
+color_change_raw <- read.csv('data-raw/color_change_raw.csv')
+
+color_change <-
+  color_change_raw %>%
+  tidyr::pivot_longer(-Individual,
+                      names_sep = '\\.',
+                      names_to = c("patch_number","observing_animal"),
+                      values_to = "color_change",
+                      names_prefix = "Patch\\.") |>
+  mutate(observing_animal = factor(tolower(observing_animal)),
+         patch_number = factor(patch_number)) |>
+  left_join(
+    id_crosswalk,
+    by = c("Individual"="indv")
+  ) |>
+  select(id,everything(),-Individual) |>
+  arrange(id)
+
+usethis::use_data(color_change)
