@@ -72,7 +72,7 @@ chameleons <-
   select(id,growth_stage,everything(),-indv) |>
   arrange(id)
 
-usethis::use_data(chameleons)
+usethis::use_data(chameleons, overwrite = TRUE)
 
 # 4. Clean Predation Data ----
 predation_raw <- read.csv('data-raw/predation_raw.csv')
@@ -121,7 +121,7 @@ predation <-
   select(id,everything(),-indv,-Individual) |>
   arrange(id)
 
-usethis::use_data(predation)
+usethis::use_data(predation, overwrite = TRUE)
 
 # 5. Clean Color Change Data ----
 color_change_raw <- read.csv('data-raw/color_change_raw.csv')
@@ -142,4 +142,4 @@ color_change <-
   select(id,everything(),-Individual) |>
   arrange(id)
 
-usethis::use_data(color_change)
+usethis::use_data(color_change, overwrite = TRUE)
