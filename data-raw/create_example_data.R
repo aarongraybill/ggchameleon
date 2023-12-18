@@ -68,5 +68,6 @@ measurements <-
 
 measurements <-
   measurements |>
-  left_join(id_crosswalk) |>
-  select(id,growth_stage,everything(),-indv)
+  left_join(id_crosswalk, by = 'indv') |>
+  select(id,growth_stage,everything(),-indv) |>
+  arrange(id)
