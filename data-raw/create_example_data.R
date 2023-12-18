@@ -73,3 +73,52 @@ chameleons <-
   arrange(id)
 
 usethis::use_data(chameleons)
+
+# 4. Clean Predation Data ----
+predation_raw <- read.csv('data-raw/predation_raw.csv')
+
+predation <- predation_raw
+
+# Fix a missing value
+predation$prop.nothing[predation$Individual == "CcalypH09" &
+                         predation$Habitat == "Closed" &
+                         predation$Predator == "Snake"] <- .25
+
+predation <-
+  predation %>%
+  select(predator=Predator,habitat=Habitat,starts_with("prop."),Individual) %>%
+  tidyr::pivot_longer(starts_with("prop."),names_to = "response",values_to = "proportion") %>%
+  mutate(response = gsub("^prop\\.","",response)) %>%
+  # Each combindation of treatments was applied 4 times
+  mutate(trials = 4*proportion) %>%
+  mutate(predator = tolower(predator),
+         habitat = tolower(habitat)) %>%
+  mutate(foliage = ifelse(habitat=="open","sparse","dense")) %>%
+  mutate(response = case_when(
+    response == "agg" ~ "aggregression",
+    response == "crypsis" ~ "color change",
+    response == "drop" ~ "free fall",
+    response == "flee" ~ "flee",
+    response == "leaf" ~ "leaf mimicry",
+    response == "nothing" ~ "nothing",
+    response == "ring" ~ "movement around branch"
+  )) %>%
+  select(predator,foliage,trials,response,Individual) %>%
+  tidyr::uncount(trials) %>%
+  mutate(
+    foliage = factor(foliage,c("sparse","dense"), ordered=T),
+    response = factor(response,ordered = F),
+    predator = factor(predator,ordered = F)
+  )
+
+predation <-
+  predation |>
+  mutate(indv = gsub("^Ccalyp","",Individual)) |>
+  left_join(
+    id_crosswalk,
+    by = "indv"
+  ) |>
+  select(id,everything(),-indv,-Individual) |>
+  arrange(id)
+
+usethis::use_data(predation)
