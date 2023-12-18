@@ -71,3 +71,5 @@ chameleons <-
   left_join(id_crosswalk, by = 'indv') |>
   select(id,growth_stage,everything(),-indv) |>
   arrange(id)
+
+usethis::use_data(chameleons)
