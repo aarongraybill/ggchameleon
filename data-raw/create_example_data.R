@@ -38,4 +38,35 @@ id_crosswalk <-
   # Only keep unique internal id to new id pairs
   distinct(indv, id)
 
+# 3. Clean Measurments Data
+measurements <-
+  measurements_raw |>
+  rename(
+    head_length = HL,
+    head_height = HH,
+    casque_height = CH,
+    casque_width = CW,
+    lower_jaw_length = LJL,
+    head_width = HW,
+    jaw_width = JW,
+    snout_vent_length = SVL,
+    max_bite_force = max.bite.force,
+    normalized_peak_velocity = normalized.peak.velocity,
+    peak_velocity_m = peak.velocity.m,
+    peak_velocity_cm = peak.velocity.cm
+  ) |>
+  mutate(
+    growth_stage = case_when(
+      substr(indv,1,1)=="A" ~ "adult",
+      substr(indv,1,1)=="J" ~ "juvenile",
+      substr(indv,1,1)=="H" ~ "hatchling"
+    )
+  ) |>
+  mutate(
+    growth_stage = factor(growth_stage,c("hatchling","juvenile","adult"),ordered=T)
+  )
 
+measurements <-
+  measurements |>
+  left_join(id_crosswalk) |>
+  select(id,growth_stage,everything(),-indv)
