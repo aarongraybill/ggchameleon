@@ -38,7 +38,7 @@ id_crosswalk <-
   # Only keep unique internal id to new id pairs
   distinct(indv, id)
 
-# 3. Clean Measurments Data
+# 3. Clean Measurments Data ----
 chameleons <-
   chameleons_raw |>
   rename(
