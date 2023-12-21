@@ -12,9 +12,6 @@
 chameleons_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon_Measurements_v3.csv'
 download.file(chameleons_url,'data-raw/chameleons_raw.csv')
 
-color_change_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon%20Color%20JNDs.csv'
-download.file(color_change_url,'data-raw/color_change_raw.csv')
-
 predation_url <- 'https://raw.githubusercontent.com/alliebl/Drown-et-al/main/Chameleon%20Behavior%20Proportions.csv'
 download.file(predation_url,'data-raw/predation_raw.csv')
 
@@ -89,19 +86,19 @@ predation <-
   select(predator=Predator,habitat=Habitat,starts_with("prop."),Individual) %>%
   tidyr::pivot_longer(starts_with("prop."),names_to = "response",values_to = "proportion") %>%
   mutate(response = gsub("^prop\\.","",response)) %>%
-  # Each combindation of treatments was applied 4 times
+  # Each combination of treatments was applied 4 times
   mutate(trials = 4*proportion) %>%
   mutate(predator = tolower(predator),
          habitat = tolower(habitat)) %>%
   mutate(foliage = ifelse(habitat=="open","sparse","dense")) %>%
   mutate(response = case_when(
     response == "agg" ~ "aggregression",
-    response == "crypsis" ~ "color change",
-    response == "drop" ~ "free fall",
-    response == "flee" ~ "flee",
-    response == "leaf" ~ "leaf mimicry",
+    response == "crypsis" ~ "crypsis",
+    response == "drop" ~ "free-falling",
+    response == "flee" ~ "fleeing",
+    response == "leaf" ~ "leaf-mimicking",
     response == "nothing" ~ "nothing",
-    response == "ring" ~ "movement around branch"
+    response == "ring" ~ "ring-flipping"
   )) %>%
   select(predator,foliage,trials,response,Individual) %>%
   tidyr::uncount(trials) %>%
