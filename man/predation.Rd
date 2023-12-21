@@ -41,5 +41,7 @@ chameleon \emph{Chamaeleo calyptratus}. Journal of Experimental Biology,
 Descriptions for \code{repsonse} quoted directly from R. M. Drown, A. L. Liebl,
 and C. V. Anderson (2022). Raw data available from GitHub at
 \url{https://github.com/alliebl/Drown-et-al}.
+
+Linkable to \link{chameleons} via the \code{id} column.
 }
 \keyword{datasets}

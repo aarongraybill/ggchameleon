@@ -33,6 +33,8 @@
 #' @details
 #' Raw data available from GitHub at <https://github.com/alliebl/Drown-et-al>.
 #'
+#' Linkable to [predation] via the `id` column.
+#'
 "chameleons"
 
 #' Responses to Simulated Predation
@@ -68,4 +70,6 @@
 #' Descriptions for `repsonse` quoted directly from R. M. Drown, A. L. Liebl,
 #' and C. V. Anderson (2022). Raw data available from GitHub at
 #'<https://github.com/alliebl/Drown-et-al>.
+#'
+#' Linkable to [chameleons] via the `id` column.
 "predation"

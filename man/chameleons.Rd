@@ -42,5 +42,7 @@ chameleon \emph{Chamaeleo calyptratus}. Journal of Experimental Biology,
 }
 \details{
 Raw data available from GitHub at \url{https://github.com/alliebl/Drown-et-al}.
+
+Linkable to \link{predation} via the \code{id} column.
 }
 \keyword{datasets}
