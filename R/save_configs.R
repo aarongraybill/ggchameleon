@@ -37,7 +37,7 @@ save_configs <- function(file="chameleon.yml",overwrite=FALSE){
 
   # We don't care about what theme the user had prior
   # to using ggchameleon
-  to_write <- as.list(the)[names(the)!='old_theme']
+  to_write <- as.list(the)[!names(the)%in%c('old_theme','old_geoms','old_scales')]
 
   # Convert gg theme to yaml friendly list
   to_write[['theme']] <- theme_to_list(to_write[['theme']])
